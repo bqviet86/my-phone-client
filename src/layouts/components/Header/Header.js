@@ -25,7 +25,7 @@ function Header() {
     const [isLogout, setIsLogout] = useState(false)
 
     useEffect(() => {
-        if (currentUser) {
+        if (currentUser?.user_id) {
             const getMe = async () => {
                 try {
                     const response = await api.get('/users/me')
@@ -38,10 +38,10 @@ function Header() {
 
             getMe()
         }
-    }, [currentUser])
+    }, [currentUser?.user_id])
 
     useEffect(() => {
-        if (isLogout) {
+        if (isLogout && currentUser?.refresh_token) {
             const callLogout = async () => {
                 const data = {
                     refresh_token: currentUser.refresh_token
@@ -59,7 +59,7 @@ function Header() {
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentUser, isLogout])
+    }, [isLogout, currentUser?.refresh_token])
 
     const handleLogout = async () => {
         setIsLogout(true)

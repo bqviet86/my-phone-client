@@ -58,7 +58,7 @@ function Register() {
         const result = await register(dataToSend)
 
         if (!result.success) {
-            setError((prev) => ({ ...prev, ...result.errors }))
+            setError(result.errors)
             return
         }
 

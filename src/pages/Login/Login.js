@@ -34,7 +34,7 @@ function Login() {
         const result = await login(data)
 
         if (!result.success) {
-            setError((prev) => ({ ...prev, ...result.errors }))
+            setError(result.errors)
             return
         }
 

@@ -42,11 +42,20 @@ const callRefreshTokenAPI = async (refresh_token) => {
         // Lưu access token mới và refresh token mới vào local storage
         saveUser(new_access_token, new_refresh_token)
 
+        // Cập nhật access token mới và refresh token mới vào redux store
+        store.dispatch({
+            type: 'user/login',
+            payload: {
+                access_token: new_access_token,
+                refresh_token: new_refresh_token
+            }
+        })
+
         // Thông báo cho các request đang chờ token mới biết là đã có token mới
         onTokenRefreshed(new_access_token)
 
-        // Trả về access token mới và refresh token mới
-        return { new_access_token, new_refresh_token }
+        // Trả về access token mới
+        return new_access_token
     } catch (error) {
         throw error
     }
@@ -66,16 +75,7 @@ api.interceptors.request.use(
                 isRefreshing = true
 
                 const refresh_token = user.refresh_token
-                const { new_access_token, new_refresh_token } = await callRefreshTokenAPI(refresh_token)
-
-                // Cập nhật access token mới và refresh token mới vào redux store
-                store.dispatch({
-                    type: 'user/login',
-                    payload: {
-                        access_token: new_access_token,
-                        refresh_token: new_refresh_token
-                    }
-                })
+                const new_access_token = await callRefreshTokenAPI(refresh_token)
 
                 // Cập nhật access token mới vào header của request
                 config.headers.Authorization = `Bearer ${new_access_token}`
