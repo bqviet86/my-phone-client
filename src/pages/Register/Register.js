@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import classNames from 'classnames/bind'
+import { toast } from 'react-hot-toast'
 
 import images from '~/assets/images'
 import config from '~/config'
@@ -64,6 +65,7 @@ function Register() {
 
         // Đăng ký thành công thì chuyển sang trang chủ
         navigate(config.routes.home)
+        toast.success(result.message)
     }
 
     return (
