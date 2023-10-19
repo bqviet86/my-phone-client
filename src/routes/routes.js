@@ -7,6 +7,11 @@ import Login from '~/pages/Login'
 import Register from '~/pages/Register'
 import PhoneDetail from '~/pages/PhoneDetail'
 import Cart from '~/pages/Cart'
+import Account, { AccountAddresses, AccountOrderDetail, AccountOrders } from '~/pages/Account'
+
+// Thêm unnecessary: true để báo là route này khi đã đăng nhập thì không cần truy cập nữa -> điều hướng về home
+// Thêm protected: true để báo là route này cần phải đăng nhập mới được truy cập -> điều hướng về login
+// Children: [] chứa các route con của nó
 
 const routes = [
     {
@@ -18,13 +23,13 @@ const routes = [
         path: config.routes.login,
         component: Login,
         layout: DefaultLayout,
-        redirect: config.routes.home
+        unnecessary: true
     },
     {
         path: config.routes.register,
         component: Register,
         layout: DefaultLayout,
-        redirect: config.routes.home
+        unnecessary: true
     },
     {
         path: config.routes.phoneDetail,
@@ -35,11 +40,36 @@ const routes = [
         path: config.routes.cart,
         component: Cart,
         layout: DefaultLayout,
+        protected: true
+    },
+    {
+        path: config.routes.account,
+        component: Account,
+        layout: DefaultLayout,
         protected: true,
-        redirect: config.routes.login
+        children: [
+            {
+                path: config.routes.accountOrders,
+                component: AccountOrders,
+                layout: DefaultLayout,
+                protected: true,
+                children: [
+                    {
+                        path: config.routes.accountOrderDetail,
+                        component: AccountOrderDetail,
+                        layout: DefaultLayout,
+                        protected: true
+                    }
+                ]
+            },
+            {
+                path: config.routes.accountAddresses,
+                component: AccountAddresses,
+                layout: DefaultLayout,
+                protected: true
+            }
+        ]
     }
-
-    // /account /account/orders /account/orders/:order_id /account/addresses
 ]
 
 export default routes

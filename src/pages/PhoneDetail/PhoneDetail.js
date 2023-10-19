@@ -68,7 +68,7 @@ function PhoneDetail() {
     const handleAddToCart = async () => {
         try {
             const response = await api.post('/carts', {
-                phone_id: 'cc',
+                phone_id: phone._id,
                 phone_option_id: currentOption._id,
                 quantity: 1
             })

@@ -4,7 +4,10 @@ const routes = {
     register: '/register',
     phoneDetail: '/phone/:phone_id',
     cart: '/cart',
-    account: '/account'
+    account: '/account',
+    accountOrders: '/account/orders',
+    accountOrderDetail: '/account/orders/:order_id',
+    accountAddresses: '/account/addresses'
 }
 
 export default routes

@@ -1,48 +1,48 @@
 import { BrowserRouter as Router, Route, Navigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import Wrapper from './Wrapper'
-import routes from './routes'
-import { useSelector } from 'react-redux'
+import config from './config'
 import { userSelector } from './redux/selectors'
+import routes from './routes'
 
 function App() {
     const currentUser = useSelector(userSelector)
 
+    const renderRoutes = (routes) => {
+        return routes.map((route, index) => {
+            const isParent = !!route.children && route.children.length > 0
+            const Layout = route.layout
+            const Page = route.component
+
+            let element = (
+                <Layout>
+                    <Page />
+                </Layout>
+            )
+
+            // Điều hướng đến trang chủ nếu đã đăng nhập mà truy cập vào các trang không cần thiết như login, register, ...
+            if (currentUser && route.unnecessary) {
+                element = <Navigate to={config.routes.home} />
+            }
+
+            // Điều hướng đến trang login nếu chưa đăng nhập mà truy cập vào các trang đuợc bảo vệ như cart, account, ...
+            if (!currentUser && route.protected) {
+                element = <Navigate to={config.routes.login} />
+            }
+
+            return (
+                <Route key={index} path={route.path} element={element}>
+                    {isParent && renderRoutes(route.children)}
+                </Route>
+            )
+        })
+    }
+
     return (
         <div className='App'>
             <Router>
-                <Wrapper>
-                    {routes.map((route, index) => {
-                        const Layout = route.layout
-                        const Page = route.component
-                        const RouteComponent = (
-                            <Route
-                                key={index}
-                                path={route.path}
-                                element={
-                                    <Layout>
-                                        <Page />
-                                    </Layout>
-                                }
-                            />
-                        )
-                        const NavigateComponent = (
-                            <Route key={index} path={route.path} element={<Navigate to={route.redirect} />} />
-                        )
-
-                        if (route.protected) {
-                            if (currentUser) {
-                                return RouteComponent
-                            }
-
-                            return NavigateComponent
-                        } else if (route.redirect && currentUser) {
-                            return NavigateComponent
-                        }
-
-                        return RouteComponent
-                    })}
-                </Wrapper>
+                <Wrapper>{renderRoutes(routes)}</Wrapper>
             </Router>
         </div>
     )
