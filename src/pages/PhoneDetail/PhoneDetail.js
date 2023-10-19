@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import classNames from 'classnames/bind'
 
@@ -7,6 +7,7 @@ import PhoneImage from './PhoneImage'
 import PhoneInfoTable from './PhoneInfoTable'
 import Modal from '~/components/Modal'
 import images from '~/assets/images'
+import config from '~/config'
 import api from '~/utils/api'
 import formatPrice from '~/utils/formatPrice'
 import styles from './PhoneDetail.module.scss'
@@ -15,6 +16,7 @@ const cx = classNames.bind(styles)
 
 function PhoneDetail() {
     const { phone_id } = useParams()
+    const navigate = useNavigate()
 
     const [phone, setPhone] = useState()
     const [options, setOptions] = useState([])
@@ -46,7 +48,7 @@ function PhoneDetail() {
                 setColors(() => handleSetColorsAndCapacities(response.data.result.options, 'color'))
                 setCapacities(() => handleSetColorsAndCapacities(response.data.result.options, 'capacity'))
             } catch (error) {
-                console.log(error)
+                console.log(error.response.data)
             }
         }
 
@@ -61,6 +63,23 @@ function PhoneDetail() {
         })
 
         setCurrentOption(newCurrentOption)
+    }
+
+    const handleAddToCart = async () => {
+        try {
+            const response = await api.post('/carts', {
+                phone_id: 'cc',
+                phone_option_id: currentOption._id,
+                quantity: 1
+            })
+            const cart_id = response.data.result._id
+
+            return cart_id
+        } catch (error) {
+            console.log(error.response.data)
+
+            return null
+        }
     }
 
     const handleShowTable = () => {
@@ -135,8 +154,19 @@ function PhoneDetail() {
                                 </div>
 
                                 <div className={cx('button-wrap')}>
-                                    <button className={cx('buy-btn')}>MUA NGAY</button>
-                                    <button className={cx('add-to-cart-btn')}>THÊM VÀO GIỎ HÀNG</button>
+                                    <button
+                                        className={cx('buy-btn')}
+                                        onClick={async () => {
+                                            const cart_id = await handleAddToCart()
+
+                                            if (cart_id) navigate(config.routes.cart, { state: { cart_id } })
+                                        }}
+                                    >
+                                        MUA NGAY
+                                    </button>
+                                    <button className={cx('add-to-cart-btn')} onClick={handleAddToCart}>
+                                        THÊM VÀO GIỎ HÀNG
+                                    </button>
                                 </div>
                             </div>
                         </div>
