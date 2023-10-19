@@ -38,6 +38,8 @@ const routes = [
         protected: true,
         redirect: config.routes.login
     }
+
+    // /account /account/orders /account/orders/:order_id /account/addresses
 ]
 
 export default routes

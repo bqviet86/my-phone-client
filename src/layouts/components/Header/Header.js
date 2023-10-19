@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import classNames from 'classnames/bind'
 import { Icon } from '@iconify/react'
@@ -16,7 +16,6 @@ import styles from './Header.module.scss'
 const cx = classNames.bind(styles)
 
 function Header() {
-    const currentPath = useLocation().pathname
     const currentUser = useSelector(userSelector)
     const navigate = useNavigate()
     const { logout } = useLogout()
@@ -131,27 +130,24 @@ function Header() {
                         </div>
                     ) : (
                         <>
-                            <Link
+                            <NavLink
                                 to={config.routes.login}
-                                className={cx('navigate', { active: currentPath === config.routes.login })}
+                                className={({ isActive }) => cx('navigate', { active: isActive })}
                             >
                                 Đăng nhập
-                            </Link>
-                            <Link
+                            </NavLink>
+                            <NavLink
                                 to={config.routes.register}
-                                className={cx('navigate', { active: currentPath === config.routes.register })}
+                                className={({ isActive }) => cx('navigate', { active: isActive })}
                             >
                                 Đăng ký
-                            </Link>
+                            </NavLink>
                         </>
                     )}
-                    <Link
-                        to={config.routes.cart}
-                        className={cx('navigate', { active: currentPath === config.routes.cart })}
-                    >
+                    <NavLink to={config.routes.cart} className={({ isActive }) => cx('navigate', { active: isActive })}>
                         Giỏ hàng
                         <Icon icon='mdi:cart' />
-                    </Link>
+                    </NavLink>
                 </div>
             </div>
         </div>

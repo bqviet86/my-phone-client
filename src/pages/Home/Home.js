@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 import classNames from 'classnames/bind'
 
-import Slider from './Slider'
+import HomeSlider from './HomeSlider'
 import Phone from '~/components/Phone'
 import { sliderData } from '~/constants'
 import api from '~/utils/api'
 import styles from './Home.module.scss'
-import 'swiper/css/bundle'
 
 const cx = classNames.bind(styles)
 
@@ -62,7 +61,7 @@ function Home() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('slider-wrap')}>
-                <Slider data={sliderData} />
+                <HomeSlider data={sliderData} />
             </div>
 
             <div className={cx('products-wrap')}>

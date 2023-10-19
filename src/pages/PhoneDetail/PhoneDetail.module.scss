@@ -1,0 +1,218 @@
+.wrapper {
+    margin: 0 auto;
+    padding: 40px 0;
+    width: var(--width-layout);
+
+    .above {
+        margin: 0 -10px;
+        display: flex;
+    }
+
+    .under {
+        margin-top: 40px;
+        display: flex;
+        border-radius: 8px;
+        background-color: #f9fafc;
+        box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
+    }
+}
+
+.phone {
+    margin: 0 10px;
+    padding: 24px;
+    width: 76%;
+    display: flex;
+    border-radius: 8px;
+    background-color: #f9fafc;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
+
+    .info-wrap {
+        margin-left: 20px;
+
+        .name {
+            margin-bottom: 8px;
+            font-size: 2.4rem;
+            line-height: 1.4;
+        }
+
+        .text {
+            font-size: 1.4rem;
+            color: #888;
+        }
+
+        .options {
+            margin: 20px 0;
+
+            .buttons-wrap {
+                margin-top: 20px;
+
+                .buttons-list {
+                    margin: 0 -4px;
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    .button {
+                        margin: 8px 4px 0;
+                        padding: 8px 16px;
+                        font-size: 1.4rem;
+                        border: 1px solid #ddd;
+                        border-radius: 4px;
+                        background-color: #fff;
+                        cursor: pointer;
+
+                        &.active {
+                            border-color: var(--blue);
+                            color: var(--blue);
+                        }
+
+                        &:hover {
+                            color: var(--blue);
+                        }
+                    }
+                }
+            }
+        }
+
+        .price-wrap {
+            margin-top: 32px;
+            line-height: 1;
+
+            .price {
+                font-size: 2rem;
+                font-weight: bold;
+                color: var(--blue);
+            }
+
+            .price-before-discount {
+                margin-top: 4px;
+
+                span {
+                    font-size: 1.3rem;
+                    text-decoration: line-through;
+
+                    & + span {
+                        margin-left: 4px;
+                        text-decoration: none;
+                        color: var(--blue);
+                    }
+                }
+            }
+        }
+
+        .button-wrap {
+            margin: 30px -4px 0;
+            display: flex;
+            flex-wrap: wrap;
+
+            button {
+                margin: 0 4px;
+                padding: 12px 16px;
+                width: calc(50% - 8px);
+                font-size: 1.4rem;
+                font-weight: bold;
+                border: 1px solid var(--blue);
+                border-radius: 4px;
+                background-color: #fff;
+                cursor: pointer;
+
+                &.buy-btn {
+                    color: #fff;
+                    background-color: var(--blue);
+                }
+
+                &.add-to-cart-btn {
+                    border-color: var(--blue);
+                    color: var(--blue);
+                }
+            }
+        }
+    }
+}
+
+.additional-info {
+    margin: 0 10px;
+    padding: 16px;
+    width: 24%;
+    height: max-content;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
+    background-color: #f9fafc;
+
+    .title {
+        font-size: 1.4rem;
+        font-weight: bold;
+        line-height: 1.3;
+    }
+
+    .info {
+        margin-top: 16px;
+        display: flex;
+        align-items: center;
+
+        img {
+            width: 24px;
+            height: 24px;
+            object-fit: cover;
+        }
+
+        p {
+            margin-left: 8px;
+            font-size: 1.33rem;
+            font-weight: 500;
+        }
+    }
+}
+
+.description-wrap {
+    width: 66.66666%;
+
+    .title {
+        padding: 0 16px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        font-size: 2rem;
+    }
+
+    .description {
+        padding: 16px;
+
+        h2 {
+            margin-top: 32px;
+            font-size: 2.8rem;
+            font-weight: 600;
+
+            &:nth-child(1) {
+                margin-top: 0;
+            }
+        }
+
+        h3 {
+            margin-top: 32px;
+            font-size: 2rem;
+        }
+
+        p {
+            margin-top: 16px;
+            font-size: 1.4rem;
+            line-height: 1.6;
+        }
+
+        img {
+            margin-top: 16px;
+            width: 100%;
+        }
+    }
+}
+
+.info-detail-wrap {
+    flex: 1;
+
+    .additional-display {
+        margin-top: 12px;
+        padding: 0 16px;
+        text-align: center;
+        font-size: 1.33rem;
+        color: var(--blue);
+        cursor: pointer;
+    }
+}
