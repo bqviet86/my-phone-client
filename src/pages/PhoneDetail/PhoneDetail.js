@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import classNames from 'classnames/bind'
+import { toast } from 'react-hot-toast'
 
 import PhoneImage from './PhoneImage'
 import PhoneInfoTable from './PhoneInfoTable'
@@ -73,6 +74,8 @@ function PhoneDetail() {
                 quantity: 1
             })
             const cart_id = response.data.result._id
+
+            toast.success(response.data.message)
 
             return cart_id
         } catch (error) {

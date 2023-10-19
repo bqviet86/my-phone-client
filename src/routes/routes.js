@@ -51,13 +51,11 @@ const routes = [
             {
                 path: config.routes.accountOrders,
                 component: AccountOrders,
-                layout: DefaultLayout,
                 protected: true,
                 children: [
                     {
                         path: config.routes.accountOrderDetail,
                         component: AccountOrderDetail,
-                        layout: DefaultLayout,
                         protected: true
                     }
                 ]
@@ -65,7 +63,6 @@ const routes = [
             {
                 path: config.routes.accountAddresses,
                 component: AccountAddresses,
-                layout: DefaultLayout,
                 protected: true
             }
         ]

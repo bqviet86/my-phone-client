@@ -1,5 +1,7 @@
+import React from 'react'
 import { BrowserRouter as Router, Route, Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { Toaster } from 'react-hot-toast'
 
 import Wrapper from './Wrapper'
 import config from './config'
@@ -12,7 +14,7 @@ function App() {
     const renderRoutes = (routes) => {
         return routes.map((route, index) => {
             const isParent = !!route.children && route.children.length > 0
-            const Layout = route.layout
+            const Layout = route.layout || React.Fragment
             const Page = route.component
 
             let element = (
@@ -42,7 +44,10 @@ function App() {
     return (
         <div className='App'>
             <Router>
-                <Wrapper>{renderRoutes(routes)}</Wrapper>
+                <>
+                    <Toaster position='top-right' reverseOrder={false} />
+                    <Wrapper>{renderRoutes(routes)}</Wrapper>
+                </>
             </Router>
         </div>
     )

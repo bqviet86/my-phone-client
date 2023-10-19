@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import classNames from 'classnames/bind'
 import { Icon } from '@iconify/react'
 import HeadlessTippy from '@tippyjs/react/headless'
+import { toast } from 'react-hot-toast'
 
 import images from '~/assets/images'
 import config from '~/config'
@@ -48,6 +49,7 @@ function Header() {
                 const result = await logout(data)
 
                 if (result.success) {
+                    toast.success(result.message)
                     navigate(config.routes.home)
                 }
 
