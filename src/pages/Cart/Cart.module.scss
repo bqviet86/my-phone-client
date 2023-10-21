@@ -1,0 +1,103 @@
+.wrapper{
+
+    width: var(--width-layout);
+    margin: 0 auto;
+    padding: 40px 0;
+
+    .content{
+        margin: 20px -10px 0;
+        display: flex;
+        justify-content: space-between;
+        .cart{
+            padding: 8px 12px;
+            width: 65%;
+            height: min-content;
+            border-radius: 5px;
+            box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.1);
+            background-color: #f9fafc;
+            text-align: center;
+
+            .cart-header{
+
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .cart-header-title{
+
+                }
+            }
+
+            .cart-des{
+                display: flex;
+
+                h3{
+                    width: 20%;
+                }
+                h3:nth-child(1){
+                    width: 40%;
+                }
+            }
+           
+        }
+
+
+        
+
+        .total{
+            width: 33%;
+            background-color: #f9fafc;
+            border-radius: 5px;
+            box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.1);
+            h3{
+                margin: 20px 12px;
+            }
+
+            .temporary{
+                margin: 20px 12px;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .official{
+                margin: 20px 12px;
+                display: flex;
+                justify-content: space-between;
+
+                .official-price{
+                    margin-left: 48px;
+                    color: rgb(20, 53, 195) ;
+                }
+                .official-vat{
+                    font-size: 1.2rem;
+                }
+            }
+
+            .continue{
+                width: 100%;
+                margin: 12px px;
+                height: 50px;
+                display: flex;
+                
+            
+                button{
+                    margin-left: 20px;
+                    cursor: pointer;
+                    border-radius: 4px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                    background-color: rgb(20, 53, 195);
+                    border-color: rgb(20, 53, 195);
+                    color: rgb(255, 255, 255);
+                    border-width: 1px;
+                    border-style: solid;
+                    width: 90%;
+                    padding: 0.7rem 1rem;
+                    margin-top: 1rem;
+                }                              
+                    
+            }
+        }
+    }
+}
