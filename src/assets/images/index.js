@@ -8,7 +8,8 @@ const images = {
     oppo_find_n2_flip: require('~/assets/images/oppo-find-n2-flip.jpeg'),
     xiaomi_12t: require('~/assets/images/xiaomi-12t.jpeg'),
     info_1: require('~/assets/images/info-1.png'),
-    info_2: require('~/assets/images/info-2.png')
+    info_2: require('~/assets/images/info-2.png'),
+    no_products_found: require('~/assets/images/no-products-found.png')
 }
 
 export default images
