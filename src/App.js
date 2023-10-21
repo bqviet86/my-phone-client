@@ -7,7 +7,7 @@ import Wrapper from './Wrapper'
 import config from './config'
 import { userSelector } from './redux/selectors'
 import routes from './routes'
-
+import './index.css'
 function App() {
     const currentUser = useSelector(userSelector)
 
