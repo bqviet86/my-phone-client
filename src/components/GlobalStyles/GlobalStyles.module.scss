@@ -55,13 +55,19 @@ ul {
 }
 
 button {
-    margin: 20px 4px;
+    margin: 4px 4px;
     width: 60px;
-    height: 40px;
+    height: 35px;
     cursor: pointer;
-    background-color: #fff;
+    background-color: 
+    #fff;
     border: 1px solid #bbb;
     border-radius: 2px;
+    &:active {
+        border-color: var(--blue);
+        color: var(--blue);
+    }
+   
 }
 
 button:hover {

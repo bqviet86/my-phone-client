@@ -9,27 +9,140 @@
         display: flex;
 
         .cart-detail-right {
+            width: 50%;
 
-            .cart-detail-imgage-src {
+            .cart-detail-image-src {
                 width: 130px;
             }
         }
-        
+
         .cart-detail-left {
+            width: 50%;
+            margin-left:5px;
+            .cart-detail-image-name{
+                font-size: 1.2rem;
+            }
+            
+            .option {
+
+                width: auto;
+                height: auto;
+                background-color: #fff;
+                justify-content: space-around;
+                flex-wrap: wrap;
+                border-radius: 4px;
+                box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
+
+                // position: absolute;
+                .option-color {
+                    flex-wrap: wrap;
+
+                    padding: 4px;
+                    display: flex;
+                    align-items: center;
+                    .color {
+                        font-size: 1.4rem;
+
+                    }
+
+                    .color_btn {}
+
+                    .button {
+                        width: 45px;
+                        height: 40px;
+                        background-color: #fff;
+                        // display: flex;
+                        font-size: 1rem;
+                        align-items: center;
+                        cursor: pointer;
+
+                        &.active {
+                            border-color: var(--blue);
+                            color: var(--blue);
+                        }
+
+                        &:hover {
+                            color: var(--blue);
+                        }
+
+
+
+                    }
+
+                }
+
+                .option-capacity {
+
+
+                    padding: 4px;
+                    display: flex;
+                    align-items: center;
+                    flex-wrap: wrap;
+
+                    .capacity {
+                        font-size: 1.4rem;
+                    }
+
+                    .capacity-btn {
+                        .button {
+                            width: 45px;
+                            height: 25px;
+                            font-size: 1rem;
+
+                            &.active {
+                                border-color: var(--blue);
+                                color: var(--blue);
+                            }
+
+                            &:hover {
+                                color: var(--blue);
+                            }
+                        }
+                    }
+                }
+
+                .option-confirm {
+
+                    .button {
+                        width: 70px;
+                        height: 25px;
+                        background-color: rgb(20, 53, 195);
+                        cursor: pointer;
+                        color: #fff;
+                        border-radius: 4px;
+
+                    }
+
+                    .button:hover {
+                        color: #fff;
+                        background-color: var(--blue);
+
+                        box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
+
+                    }
+                }
+
+                
+            }
+
             .cart-detail-selected {
 
 
                 .button {
 
-                    width: 200px;
+                    width: 100%;
                     margin: 8px 4px 0;
                     padding: 8px 16px;
-                    font-size: 1.4rem;
+                    font-size: 1rem;
                     border: 1px solid #ddd;
                     border-radius: 4px;
                     background-color: #fff;
                     cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
 
+                   
                     &.active {
                         border-color: var(--blue);
                         color: var(--blue);
@@ -40,65 +153,17 @@
                         box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
 
                     }
-                }
-            }
 
-
-            .option {
-
-                width: auto;
-                height: 200px;
-                background-color: #fff;
-                justify-content: space-around;
-                flex-wrap: wrap;
-                border-radius: 4px;
-                box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
-
-
-                .option-color {
-
-                    padding: 4px;
-                    display: flex;
-                    align-items: center;
-
-                    .color {
-                        font-size: 1.6rem;
-
-                    }
-
-                    .color_btn {
-
-
-
-                        .button {
-                            width: 50px;
-                            height: 50px;
-                            background-color: #fff;
-                            display: flex;
-                            align-items: center;
-                            cursor: pointer;
-                        }
-                    }
-
-                }
-
-                .option-capacity {
-
-
-                    padding: 8px;
-                    display: flex;
-                    align-items: center;
-                    flex-wrap: wrap;
-
-                    .capacity {
-                        font-size: 1.6rem;
+                    .edit {
+                        margin-left: 10px;
+                        width: 15px;
                     }
                 }
             }
 
 
-
-
+           
+           
         }
 
 
@@ -112,11 +177,22 @@
     .cart-detail-quantity {
         width: 20%;
         font-size: 1.4rem;
-
+        // display: flex;
         justify-content: space-around;
 
+        .remove{
+            margin-top: 12px;
+            width: 100%;
+            cursor: pointer;
+        }
+        &:hover{
+            color: var(--blue);
+        }
+
+        
         button {
-            width: 20px
+            width: 15px;
+            height: 15px;
         }
 
         input {
@@ -139,4 +215,5 @@
         width: 20%;
         color: var(--blue);
     }
+    
 }

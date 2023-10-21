@@ -44,6 +44,7 @@ function PhoneDetail() {
                 const response = await api.get(`/phones/${phone_id}`)
 
                 setPhone(response.data.result)
+                console.log(response.data.result.options[0]);
                 setOptions(response.data.result.options)
                 setCurrentOption(response.data.result.options[0])
                 setColors(() => handleSetColorsAndCapacities(response.data.result.options, 'color'))
