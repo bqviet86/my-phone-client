@@ -9,8 +9,12 @@ function Account() {
     return (
         <div className={cx('wrapper')}>
             <div>
-                <Link to='/account/orders'>Orders</Link>
-                <Link to='/account/addresses'>Addresses</Link>
+                <div>
+                    <Link to='/account/orders'>Orders</Link>
+                </div>
+                <div>
+                    <Link to='/account/addresses'>Addresses</Link>
+                </div>
             </div>
 
             <div>

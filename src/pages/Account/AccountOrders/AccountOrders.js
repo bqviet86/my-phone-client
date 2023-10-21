@@ -9,7 +9,10 @@ function AccountOrders() {
     return (
         <div className={cx('wrapper')}>
             <div>
-                AccountOrders <Link to='/account/orders/1'>Orders Detail</Link>
+                AccountOrders{' '}
+                <div>
+                    <Link to='/account/orders/1'>Orders Detail</Link>
+                </div>
             </div>
             <div>
                 <Outlet />

@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import { toast } from 'react-hot-toast'
 
@@ -11,6 +11,10 @@ import styles from './Login.module.scss'
 const cx = classNames.bind(styles)
 
 function Login() {
+    const location = useLocation()
+    const from = location.state?.from
+    const navigate = useNavigate()
+
     const [data, setData] = useState({
         email: '',
         password: ''
@@ -19,8 +23,13 @@ function Login() {
         email: '',
         password: ''
     })
-    const navigate = useNavigate()
     const { login } = useLogin()
+
+    useEffect(() => {
+        if (from) {
+            toast('Bạn cần đăng nhập để truy cập vào trang này', { icon: '😅' })
+        }
+    }, [from])
 
     const handleChange = (e) => {
         const { name, value } = e.target

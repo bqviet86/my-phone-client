@@ -68,35 +68,37 @@ api.interceptors.request.use(
         const user = JSON.parse(localStorage.getItem('user'))
         const access_token = user?.access_token
 
-        // Kiểm tra nếu access token hết hạn
-        if (access_token && isAccessTokenExpired(access_token)) {
-            // Nếu chưa có request nào gọi API refresh token thì gọi API refresh token
-            if (!isRefreshing) {
-                isRefreshing = true
+        if (access_token) {
+            // Nếu access token hết hạn thì gọi API refresh token để lấy access token mới
+            if (isAccessTokenExpired(access_token)) {
+                // Nếu chưa có request nào gọi API refresh token thì gọi API refresh token
+                if (!isRefreshing) {
+                    isRefreshing = true
 
-                const refresh_token = user.refresh_token
-                const new_access_token = await callRefreshTokenAPI(refresh_token)
+                    const refresh_token = user.refresh_token
+                    const new_access_token = await callRefreshTokenAPI(refresh_token)
 
-                // Cập nhật access token mới vào header của request
-                config.headers.Authorization = `Bearer ${new_access_token}`
+                    // Cập nhật access token mới vào header của request
+                    config.headers.Authorization = `Bearer ${new_access_token}`
 
-                // Đã có access token mới, set lại biến isRefreshing về false để các request tiếp theo có thể gọi API refresh token
-                isRefreshing = false
+                    // Đã có access token mới, set lại biến isRefreshing về false để các request tiếp theo có thể gọi API refresh token
+                    isRefreshing = false
 
-                return config
-            } else {
-                // Nếu đang có request nào gọi API refresh token thì đợi đến khi có access token mới thì mới tiếp tục
-                return new Promise((resolve) => {
-                    addSubscriber((new_access_token) => {
-                        config.headers.Authorization = `Bearer ${new_access_token}`
-                        resolve(config)
+                    return config
+                } else {
+                    // Nếu đang có request nào gọi API refresh token thì đợi đến khi có access token mới thì mới tiếp tục
+                    return new Promise((resolve) => {
+                        addSubscriber((new_access_token) => {
+                            config.headers.Authorization = `Bearer ${new_access_token}`
+                            resolve(config)
+                        })
                     })
-                })
+                }
             }
-        }
 
-        // Nếu access token chưa hết hạn thì set access token vào header của request
-        config.headers.Authorization = `Bearer ${access_token}`
+            // Nếu access token chưa hết hạn thì set access token vào header của request
+            config.headers.Authorization = `Bearer ${access_token}`
+        }
 
         return config
     },

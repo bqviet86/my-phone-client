@@ -10,6 +10,7 @@ import Modal from '~/components/Modal'
 import images from '~/assets/images'
 import config from '~/config'
 import api from '~/utils/api'
+import handleError from '~/utils/error'
 import formatPrice from '~/utils/formatPrice'
 import styles from './PhoneDetail.module.scss'
 
@@ -79,7 +80,7 @@ function PhoneDetail() {
 
             return cart_id
         } catch (error) {
-            console.log(error.response.data)
+            toast(handleError(error), { icon: '😢' })
 
             return null
         }

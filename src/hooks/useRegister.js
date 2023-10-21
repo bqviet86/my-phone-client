@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import { userSlice } from '~/redux/slice'
 import api from '~/utils/api'
+import handleError from '~/utils/error'
 import { saveUser } from '~/utils/localStorages'
 
 function useRegister() {
@@ -24,15 +25,7 @@ function useRegister() {
                 message: response.data.message
             }
         } catch (err) {
-            const errorObj = {}
-            const { errors: errorsResponse } = err.response.data
-
-            for (const key in errorsResponse) {
-                if (Object.hasOwnProperty.call(errorsResponse, key)) {
-                    const element = errorsResponse[key]
-                    errorObj[key] = element.msg
-                }
-            }
+            const errorObj = handleError(err)
 
             return {
                 success: false,
