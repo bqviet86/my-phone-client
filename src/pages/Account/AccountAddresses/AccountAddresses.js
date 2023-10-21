@@ -130,9 +130,9 @@ function AccountAddresses() {
 
             {/* Address list */}
             {allAddress.map((item) => (
-                <div key={item.id} className='bg-gray-50 p-4 mt-4 rounded-md'>
+                <div key={item._id} className='bg-gray-50 p-4 mt-4 rounded-md'>
                     <div className='flex justify-between'>
-                        <div key={item.id}>
+                        <div>
                             <div className='flex items-center gap-4'>
                                 <h3 className=''>{item.name}</h3>
                                 {item.default && (

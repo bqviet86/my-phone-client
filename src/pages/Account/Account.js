@@ -10,7 +10,7 @@ function Account() {
             <div className='my-8 col-span-1'>
                 <ul className='text-black bg-white border border-gray-200 rounded-lg'>
                     <li className='w-full px-8 py-4 hover:bg-gray-100 cursor-pointer hover:text-blue-500 transition-all ease-in-out hover:font-semibold border-b border-gray-200 flex gap-2 items-center'>
-                        <Link to={routes.account} className='flex items-center gap-2'>
+                        <Link to={routes.account} className='flex items-center gap-2 w-full'>
                             <span>
                                 <Icon icon='majesticons:user-line' />
                             </span>
@@ -18,7 +18,7 @@ function Account() {
                         </Link>
                     </li>
                     <li className='w-full px-8 py-4 hover:bg-gray-100 cursor-pointer hover:text-blue-500 transition-all ease-in-out hover:font-semibold border-b border-gray-200 flex gap-2 items-center'>
-                        <Link to={routes.accountOrders} className='flex items-center gap-2'>
+                        <Link to={routes.accountOrders} className='flex items-center gap-2 w-full'>
                             <span>
                                 <Icon icon='material-symbols:order-approve-outline' />
                             </span>
@@ -26,7 +26,7 @@ function Account() {
                         </Link>
                     </li>
                     <li className='w-full px-8 py-4 hover:bg-gray-100 cursor-pointer hover:text-blue-500 transition-all ease-in-out hover:font-semibold border-b border-gray-200 flex gap-2 items-center'>
-                        <Link to={routes.accountAddresses} className='flex items-center gap-2'>
+                        <Link to={routes.accountAddresses} className='flex items-center gap-2 w-full'>
                             <span>
                                 <Icon icon='ep:location' />
                             </span>
