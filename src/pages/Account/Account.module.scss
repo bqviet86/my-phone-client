@@ -1,0 +1,108 @@
+// Animation
+@keyframes sleazyDown {
+    0% {
+        transform: translateY(-5%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes sleazyUp {
+    0% {
+        transform: translateY(5%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.wrapper {
+    margin: 0 auto;
+    max-width: calc(100% - 32px);
+    height: calc(100vh - 2 * 80px);
+
+    .change-infomation-form {
+        padding: 12px;
+        border-radius: 8px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+        animation: sleazyDown 0.5s ease-in-out;
+
+        .title {
+            font-size: 2.4rem;
+            text-align: center;
+        }
+
+        .input-wrap {
+            margin-top: 12px;
+
+            &.date,
+            &.sex {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .input-label {
+                    flex-shrink: 0;
+                    width: 80px;
+                    margin: 0 10px;
+                    font-size: 1.4rem;
+                }
+
+                .radio-wrap {
+                    width: 50%;
+                    display: flex;
+                    align-items: center;
+                    font-size: 1.4rem;
+
+                    input[type='radio'] {
+                        width: 12px;
+                        height: 12px;
+                    }
+
+                    label {
+                        margin-left: 5px;
+                    }
+                }
+            }
+
+            input {
+                padding: 0 10px;
+                width: 100%;
+                height: 40px;
+                font-size: 1.4rem;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                outline: none;
+                transition: all 0.2s ease-in-out;
+
+                &:focus {
+                    border-color: var(--blue);
+                }
+            }
+
+            .error,
+            & + .error {
+                margin: 2px 0 0 10px;
+                font-size: 1rem;
+                color: var(--red);
+            }
+        }
+
+        .submit {
+            margin-top: 12px;
+            width: 100%;
+            height: 40px;
+            font-size: 1.4rem;
+            border-radius: 5px;
+            color: #fff;
+            background-color: var(--blue);
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+    }
+}
