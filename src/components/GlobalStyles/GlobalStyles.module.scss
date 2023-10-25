@@ -54,26 +54,6 @@ ul {
     list-style: none;
 }
 
-button {
-    margin: 4px 4px;
-    width: 60px;
-    height: 35px;
-    cursor: pointer;
-    background-color: 
-    #fff;
-    border: 1px solid #bbb;
-    border-radius: 2px;
-    &:active {
-        border-color: var(--blue);
-        color: var(--blue);
-    }
-   
-}
-
-button:hover {
-    color: var(--blue);
-    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
-}
 input,
 [tabindex] {
     font-family: var(--font-family);
