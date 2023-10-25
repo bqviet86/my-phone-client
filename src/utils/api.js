@@ -2,7 +2,7 @@ import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 
 import store from '~/redux/store'
-import { saveUser } from './localStorages'
+import { removeUser, saveUser } from './localStorages'
 
 const api = axios.create({
     baseURL: process.env.REACT_APP_API_URL // http://localhost:8000
@@ -51,13 +51,15 @@ const callRefreshTokenAPI = async (refresh_token) => {
             }
         })
 
-        // Thông báo cho các request đang chờ token mới biết là đã có token mới
-        onTokenRefreshed(new_access_token)
-
         // Trả về access token mới
         return new_access_token
     } catch (error) {
-        throw error
+        // Nếu gọi API refresh token mà gặp lỗi thì đăng xuất
+        removeUser()
+        store.dispatch({ type: 'user/logout' })
+
+        // Trả về null (gọi refresh token thất bại)
+        return null
     }
 }
 
@@ -78,22 +80,30 @@ api.interceptors.request.use(
                     const refresh_token = user.refresh_token
                     const new_access_token = await callRefreshTokenAPI(refresh_token)
 
-                    // Cập nhật access token mới vào header của request
-                    config.headers.Authorization = `Bearer ${new_access_token}`
+                    // Nếu có access token mới thì set access token mới vào header của request
+                    if (new_access_token) {
+                        config.headers.Authorization = `Bearer ${new_access_token}`
+                    }
 
-                    // Đã có access token mới, set lại biến isRefreshing về false để các request tiếp theo có thể gọi API refresh token
+                    // Chạy các request trong mảng subscriber để tiếp tục gọi API với access token mới
+                    onTokenRefreshed(new_access_token)
+
+                    // Set lại biến isRefreshing về false để các request tiếp theo có thể gọi API refresh token
                     isRefreshing = false
 
                     return config
-                } else {
-                    // Nếu đang có request nào gọi API refresh token thì đợi đến khi có access token mới thì mới tiếp tục
-                    return new Promise((resolve) => {
-                        addSubscriber((new_access_token) => {
-                            config.headers.Authorization = `Bearer ${new_access_token}`
-                            resolve(config)
-                        })
-                    })
                 }
+
+                // Nếu đang có request nào gọi API refresh token thì đợi đến khi có access token mới thì mới tiếp tục
+                return new Promise((resolve) => {
+                    addSubscriber((new_access_token) => {
+                        if (new_access_token) {
+                            config.headers.Authorization = `Bearer ${new_access_token}`
+                        }
+
+                        resolve(config)
+                    })
+                })
             }
 
             // Nếu access token chưa hết hạn thì set access token vào header của request

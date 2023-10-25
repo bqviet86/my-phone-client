@@ -1,13 +1,14 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import toast, { Toaster } from 'react-hot-toast'
+import { Toaster } from 'react-hot-toast'
 
 import Wrapper from './Wrapper'
 import config from './config'
 import { userSelector } from './redux/selectors'
 import routes from './routes'
 import './index.css'
+
 function App() {
     const currentUser = useSelector(userSelector)
 
@@ -25,12 +26,12 @@ function App() {
 
             // Điều hướng đến trang chủ nếu đã đăng nhập mà truy cập vào các trang không cần thiết như login, register, ...
             if (currentUser && route.unnecessary) {
-                element = <Navigate to={config.routes.home} state={{ from: route.path }} />
+                element = <Navigate to={config.routes.home} state={{ unnecessary: true }} />
             }
 
             // Điều hướng đến trang login nếu chưa đăng nhập mà truy cập vào các trang đuợc bảo vệ như cart, account, ...
             if (!currentUser && route.protected) {
-                element = <Navigate to={config.routes.login} state={{ from: route.path }} />
+                element = <Navigate to={config.routes.login} state={{ protected: true }} />
             }
 
             return (
@@ -44,7 +45,7 @@ function App() {
     return (
         <div className='App'>
             <Toaster
-                position='top-right'
+                position='bottom-right'
                 toastOptions={{
                     style: {
                         borderRadius: '10px',

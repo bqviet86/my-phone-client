@@ -45,11 +45,10 @@ function PhoneDetail() {
                 const response = await api.get(`/phones/${phone_id}`)
 
                 setPhone(response.data.result)
-                console.log(response.data.result.options[0]);
                 setOptions(response.data.result.options)
                 setCurrentOption(response.data.result.options[0])
-                setColors(() => handleSetColorsAndCapacities(response.data.result.options, 'color'))
-                setCapacities(() => handleSetColorsAndCapacities(response.data.result.options, 'capacity'))
+                setColors(handleSetColorsAndCapacities(response.data.result.options, 'color'))
+                setCapacities(handleSetColorsAndCapacities(response.data.result.options, 'capacity'))
             } catch (error) {
                 console.log(error.response.data)
             }
@@ -208,11 +207,11 @@ function PhoneDetail() {
                         </div>
 
                         <Modal
+                            width={600}
+                            height='calc(100% - 80px)'
+                            title='Thông số kỹ thuật'
                             showModal={isShowTable}
                             closeModal={handleCloseTable}
-                            title='Thông số kỹ thuật'
-                            width='700px'
-                            height='calc(100% - 80px)'
                         >
                             <PhoneInfoTable phone={phone} currentOption={currentOption} />
                         </Modal>

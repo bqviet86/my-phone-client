@@ -12,7 +12,7 @@ const cx = classNames.bind(styles)
 
 function Login() {
     const location = useLocation()
-    const from = location.state?.from
+    const isProtected = location.state?.protected
     const navigate = useNavigate()
 
     const [data, setData] = useState({
@@ -26,10 +26,12 @@ function Login() {
     const { login } = useLogin()
 
     useEffect(() => {
-        if (from) {
+        if (isProtected) {
             toast('Bạn cần đăng nhập để truy cập vào trang này', { icon: '😅' })
+            window.history.replaceState(null, '', location.pathname)
         }
-    }, [from])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     const handleChange = (e) => {
         const { name, value } = e.target

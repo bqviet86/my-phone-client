@@ -57,7 +57,7 @@ function PhoneImage({ images }) {
                                     onClick={handleShowSlider}
                                 >
                                     <img src={`${process.env.REACT_APP_IMAGE_URL_PREFIX}/${image}`} alt='img-item' />
-                                    {index === displayNumber - 1 && imageLength > displayNumber - 1 && (
+                                    {index === displayNumber - 1 && imageLength > displayNumber && (
                                         <div className={cx('image-overlay')}>+{images.length - displayNumber}</div>
                                     )}
                                 </div>
@@ -70,11 +70,11 @@ function PhoneImage({ images }) {
             </div>
 
             <Modal
+                width={800}
+                height='calc(100% - 80px)'
+                title='Ảnh điện thoại'
                 showModal={isShowSlider}
                 closeModal={handleCloseSlider}
-                title='Ảnh điện thoại'
-                width='1000px'
-                height='calc(100% - 80px)'
             >
                 <div ref={sliderRef} className={cx('slider')}>
                     <Slider modules={[Pagination]} data={images}>
@@ -82,7 +82,7 @@ function PhoneImage({ images }) {
                             <div
                                 key={index}
                                 className={cx('slider-image')}
-                                style={{ height: sliderRef.current?.clientHeight }}
+                                style={{ height: sliderRef.current?.clientHeight - 1 || 'auto' }}
                             >
                                 <img src={`${process.env.REACT_APP_IMAGE_URL_PREFIX}/${image}`} alt='img-slider' />
                             </div>
