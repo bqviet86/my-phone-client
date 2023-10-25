@@ -72,6 +72,33 @@
                         display: flex;
                         flex-wrap: wrap;
                     }
+
+                    ul.pagination {
+                        margin-top: 20px;
+                        display: flex;
+                        justify-content: center;
+
+                        li {
+                            margin: 0 8px;
+                            height: 40px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            aspect-ratio: 1 / 1;
+                            border-radius: 4px;
+                            box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
+                            cursor: pointer;
+
+                            &[aria-disabled='true'] {
+                                opacity: 0.5;
+                                cursor: not-allowed;
+                            }
+
+                            svg {
+                                font-size: 2rem;
+                            }
+                        }
+                    }
                 }
             }
         }

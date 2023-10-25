@@ -21,7 +21,7 @@ function Header() {
     const navigate = useNavigate()
     const { logout } = useLogout()
 
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState()
     const [isLogout, setIsLogout] = useState(false)
 
     useEffect(() => {
@@ -75,61 +75,64 @@ function Header() {
 
                 <div className={cx('right')}>
                     {currentUser ? (
-                        <div className={cx('user-wrap')}>
-                            <HeadlessTippy
-                                interactive
-                                placement='bottom'
-                                render={(attrs) => (
-                                    <div className={cx('user-menu')} tabIndex='-1' {...attrs}>
-                                        <div className={cx('info')}>
+                        user && (
+                            <>
+                                <div className={cx('user-wrap')}>
+                                    <HeadlessTippy
+                                        interactive
+                                        placement='bottom'
+                                        render={(attrs) => (
+                                            <div className={cx('user-menu')} tabIndex='-1' {...attrs}>
+                                                <div className={cx('info')}>
+                                                    <div className={cx('avatar')}>
+                                                        <img
+                                                            src={`${process.env.REACT_APP_IMAGE_URL_PREFIX}/${user.avatar}`}
+                                                            alt='avatar'
+                                                        />
+                                                    </div>
+                                                    <div className={cx('info-details')}>
+                                                        <span className={cx('name')}>{user.name}</span>
+                                                        <span className={cx('email')}>{user.email}</span>
+                                                    </div>
+                                                </div>
+
+                                                {userMenu.map((item, index) => (
+                                                    <Link key={index} to={item.to} className={cx('item')}>
+                                                        <Icon icon={item.icon} />
+                                                        <span>{item.title}</span>
+                                                    </Link>
+                                                ))}
+
+                                                <div className={cx('logout')}>
+                                                    <button onClick={handleLogout}>Đăng xuất</button>
+                                                </div>
+                                            </div>
+                                        )}
+                                    >
+                                        <div className={cx('user')}>
                                             <div className={cx('avatar')}>
                                                 <img
-                                                    src={
-                                                        user.avatar
-                                                            ? `${process.env.REACT_APP_IMAGE_URL_PREFIX}/${user.avatar}`
-                                                            : images.avatar
-                                                    }
+                                                    src={`${process.env.REACT_APP_IMAGE_URL_PREFIX}/${user.avatar}`}
                                                     alt='avatar'
                                                 />
                                             </div>
-                                            <div className={cx('info-details')}>
-                                                <span className={cx('name')}>{user.name}</span>
-                                                <span className={cx('email')}>{user.email}</span>
+                                            <div className={cx('hello')}>
+                                                Xin chào,
+                                                <br />
+                                                {user.name}
                                             </div>
                                         </div>
-
-                                        {userMenu.map((item, index) => (
-                                            <Link key={index} to={item.to} className={cx('item')}>
-                                                <Icon icon={item.icon} />
-                                                <span>{item.title}</span>
-                                            </Link>
-                                        ))}
-
-                                        <div className={cx('logout')}>
-                                            <button onClick={handleLogout}>Đăng xuất</button>
-                                        </div>
-                                    </div>
-                                )}
-                            >
-                                <div className={cx('user')}>
-                                    <div className={cx('avatar')}>
-                                        <img
-                                            src={
-                                                user.avatar
-                                                    ? `${process.env.REACT_APP_IMAGE_URL_PREFIX}/${user.avatar}`
-                                                    : images.avatar
-                                            }
-                                            alt='avatar'
-                                        />
-                                    </div>
-                                    <div className={cx('hello')}>
-                                        Xin chào,
-                                        <br />
-                                        {user.name}
-                                    </div>
+                                    </HeadlessTippy>
                                 </div>
-                            </HeadlessTippy>
-                        </div>
+                                <NavLink
+                                    to={config.routes.cart}
+                                    className={({ isActive }) => cx('navigate', { active: isActive })}
+                                >
+                                    Giỏ hàng
+                                    <Icon icon='mdi:cart' />
+                                </NavLink>
+                            </>
+                        )
                     ) : (
                         <>
                             <NavLink
@@ -146,10 +149,6 @@ function Header() {
                             </NavLink>
                         </>
                     )}
-                    <NavLink to={config.routes.cart} className={({ isActive }) => cx('navigate', { active: isActive })}>
-                        Giỏ hàng
-                        <Icon icon='mdi:cart' />
-                    </NavLink>
                 </div>
             </div>
         </div>

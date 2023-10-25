@@ -8,8 +8,7 @@ import Register from '~/pages/Register'
 import PhoneDetail from '~/pages/PhoneDetail'
 import Cart from '~/pages/Cart'
 import Account, { AccountAddresses, AccountOrderDetail, AccountOrders } from '~/pages/Account'
-import CartSingle from '~/pages/Cart/CartSingle'
-
+import OrderSuccess from '~/pages/OrderSuccess'
 
 // Thêm unnecessary: true để báo là route này khi đã đăng nhập thì không cần truy cập nữa -> điều hướng về home
 // Thêm protected: true để báo là route này cần phải đăng nhập mới được truy cập -> điều hướng về login
@@ -42,8 +41,7 @@ const routes = [
         path: config.routes.cart,
         component: Cart,
         layout: DefaultLayout,
-        protected: true,
-        
+        protected: true
     },
     {
         path: config.routes.account,
@@ -69,6 +67,12 @@ const routes = [
                 protected: true
             }
         ]
+    },
+    {
+        path: config.routes.orderSuccess,
+        component: OrderSuccess,
+        layout: DefaultLayout,
+        protected: true
     }
 ]
 
