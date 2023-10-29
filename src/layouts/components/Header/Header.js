@@ -32,7 +32,7 @@ function Header() {
 
                     setUser(response.data.result)
                 } catch (err) {
-                    console.log(err.response.data.message)
+                    console.log(err.response)
                 }
             }
 

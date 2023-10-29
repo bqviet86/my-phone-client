@@ -53,7 +53,7 @@ function Home() {
                         : []
                 )
             } catch (err) {
-                console.log(err.response.data.message)
+                console.log(err.response)
             }
         }
 
@@ -79,7 +79,7 @@ function Home() {
                     setTotalPages(total_pages)
                     page > total_pages && setPage(total_pages)
                 } catch (err) {
-                    console.log(err.response.data.message)
+                    console.log(err.response)
                 }
             }
 
