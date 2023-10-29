@@ -10,6 +10,11 @@ import Cart from '~/pages/Cart'
 import Account, { AccountAddresses, AccountOrderDetail, AccountOrders } from '~/pages/Account'
 import Checkout from '~/pages/Checkout'
 import OrderSuccess from '~/pages/OrderSuccess'
+import ManageUser from '~/pages/Admin/pages/ManageUser'
+import AdminLayout from '~/layouts/AdminLayout/AdminLayout'
+import ManageOrder from '~/pages/Admin/pages/ManageOrder'
+import ManageProduct from '~/pages/Admin/pages/ManageProduct'
+import ManageBrand from '~/pages/Admin/pages/ManageBrand'
 
 // Thêm unnecessary: true để báo là route này khi đã đăng nhập thì không cần truy cập nữa -> điều hướng về home
 // Thêm protected: true để báo là route này cần phải đăng nhập mới được truy cập -> điều hướng về login
@@ -80,6 +85,30 @@ const routes = [
         component: OrderSuccess,
         layout: DefaultLayout,
         protected: true
+    },
+    {
+        path: config.routes.adminUser,
+        component: ManageUser,
+        layout: AdminLayout,
+        protected: false
+    },
+    {
+        path: config.routes.adminOrder,
+        component: ManageOrder,
+        layout: AdminLayout,
+        protected: false
+    },
+    {
+        path: config.routes.adminProduct,
+        component: ManageProduct,
+        layout: AdminLayout,
+        protected: false
+    },
+    {
+        path: config.routes.adminBrand,
+        component: ManageBrand,
+        layout: AdminLayout,
+        protected: false
     }
 ]
 

@@ -9,7 +9,11 @@ const routes = {
     accountOrderDetail: '/account/orders/:order_id',
     accountAddresses: '/account/addresses',
     checkout: '/checkout',
-    orderSuccess: '/order-success'
+    orderSuccess: '/order-success',
+    adminUser: '/admin-user',
+    adminOrder: '/admin-order',
+    adminProduct: '/admin-product',
+    adminBrand: '/admin-brand'
 }
 
 export default routes
