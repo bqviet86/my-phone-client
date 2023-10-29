@@ -8,6 +8,7 @@ import Register from '~/pages/Register'
 import PhoneDetail from '~/pages/PhoneDetail'
 import Cart from '~/pages/Cart'
 import Account, { AccountAddresses, AccountOrderDetail, AccountOrders } from '~/pages/Account'
+import Checkout from '~/pages/Checkout'
 import OrderSuccess from '~/pages/OrderSuccess'
 import ManageUser from '~/pages/Admin/pages/ManageUser'
 import AdminLayout from '~/layouts/AdminLayout/AdminLayout'
@@ -72,6 +73,12 @@ const routes = [
                 protected: true
             }
         ]
+    },
+    {
+        path: config.routes.checkout,
+        component: Checkout,
+        layout: DefaultLayout,
+        protected: true
     },
     {
         path: config.routes.orderSuccess,

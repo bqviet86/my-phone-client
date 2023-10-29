@@ -77,7 +77,7 @@ function CartItem({ data, checked, carts, setCarts, cartsChecked, setCartsChecke
 
             toast.success(response.data.message)
         } catch (error) {
-            console.log(error.response.data)
+            console.log(error.response)
         }
     }
 

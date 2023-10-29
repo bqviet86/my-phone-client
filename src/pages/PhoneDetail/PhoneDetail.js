@@ -50,7 +50,7 @@ function PhoneDetail() {
                 setColors(handleSetColorsAndCapacities(response.data.result.options, 'color'))
                 setCapacities(handleSetColorsAndCapacities(response.data.result.options, 'capacity'))
             } catch (error) {
-                console.log(error.response.data)
+                console.log(error.response)
             }
         }
 
@@ -163,7 +163,9 @@ function PhoneDetail() {
                                         onClick={async () => {
                                             const cart_id = await handleAddToCart()
 
-                                            if (cart_id) navigate(config.routes.cart, { state: { cart_id } })
+                                            if (cart_id) {
+                                                navigate(config.routes.cart, { state: { cart_ids: [cart_id] } })
+                                            }
                                         }}
                                     >
                                         MUA NGAY

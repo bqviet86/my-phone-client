@@ -8,6 +8,7 @@ const routes = {
     accountOrders: '/account/orders',
     accountOrderDetail: '/account/orders/:order_id',
     accountAddresses: '/account/addresses',
+    checkout: '/checkout',
     orderSuccess: '/order-success',
     adminUser: '/admin-user',
     adminOrder: '/admin-order',

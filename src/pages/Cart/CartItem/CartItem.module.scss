@@ -64,6 +64,7 @@
                     font-size: 1.33rem;
                     font-weight: 600;
                     -webkit-line-clamp: 2;
+                    transition: color 0.1s ease-in-out;
 
                     &:hover {
                         color: var(--dark-blue);

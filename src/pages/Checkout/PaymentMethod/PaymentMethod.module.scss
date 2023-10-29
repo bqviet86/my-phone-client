@@ -1,0 +1,67 @@
+.payment-wrap {
+    margin: 8px -8px 0;
+    display: flex;
+    flex-wrap: wrap;
+
+    .payment-method {
+        position: relative;
+        margin: 8px;
+        padding: 12px 16px;
+        width: calc(50% - 16px);
+        min-height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        font-size: 1.33rem;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        background-color: #fff;
+        box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+
+        &:hover {
+            border-color: #aaa;
+            opacity: 0.9;
+        }
+
+        &.checked {
+            border-color: var(--blue);
+            opacity: 1;
+
+            .checked-block {
+                display: block;
+            }
+        }
+
+        .heading {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        .desc {
+            margin-top: 8px;
+            color: #888;
+        }
+
+        .checked-block {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 36px;
+            height: 36px;
+            display: none;
+            color: #fff;
+            border-top-right-radius: 4px;
+            border-width: 0 36px 36px 0;
+            border-style: solid;
+            border-color: transparent var(--blue) transparent transparent;
+
+            svg {
+                position: absolute;
+                top: 0px;
+                right: -36px;
+                font-size: 2rem;
+            }
+        }
+    }
+}

@@ -40,3 +40,21 @@ export const sliderData = [
         desc: 'Xiaomi 12T là một smartphone Android mạnh mẽ với giá cả hợp lý.'
     }
 ]
+
+export const PaymentMethods = {
+    CreditCard: 0, // Thẻ tín dụng
+    Cash: 1 // Tiền mặt
+}
+
+export const PaymentMethodArray = [
+    {
+        id: PaymentMethods.CreditCard,
+        name: 'Thanh toán VNPAY-QR',
+        description: 'Thanh toán qua Internet Banking, Visa, Master, JCB, VNPAY-QR'
+    },
+    {
+        id: PaymentMethods.Cash,
+        name: 'Thanh toán khi nhận hàng',
+        description: 'Thanh toán khi nhận hàng tại nhà (COD)'
+    }
+]

@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import toast from 'react-hot-toast'
 
 import CartItem from './CartItem'
 import Modal from '~/components/Modal'
 import images from '~/assets/images'
+import config from '~/config'
 import api from '~/utils/api'
 import formatPrice from '~/utils/formatPrice'
 import styles from './Cart.module.scss'
@@ -14,10 +15,10 @@ const cx = classNames.bind(styles)
 
 function Cart() {
     const location = useLocation()
-    const cartIdChecked = location.state?.cart_id
+    const cartIdsChecked = location.state?.cart_ids
 
     const [carts, setCarts] = useState([])
-    const [cartsChecked, setCartsChecked] = useState(cartIdChecked ? [cartIdChecked] : [])
+    const [cartsChecked, setCartsChecked] = useState(cartIdsChecked?.length ? [...cartIdsChecked] : [])
     const [totalPrice, setTotalPrice] = useState(0)
     const [isShowDeleteCartModal, setIsShowDeleteCartModal] = useState(false)
     const [cartDeletedId, setCartDeletedId] = useState('')
@@ -25,11 +26,15 @@ function Cart() {
     useEffect(() => {
         const getCart = async () => {
             try {
-                const response = await api.get('/carts')
+                const response = await api.get('/carts', {
+                    params: {
+                        carts: ''
+                    }
+                })
 
                 setCarts(response.data.result)
             } catch (error) {
-                console.log(error.response.data.message)
+                console.log(error.response)
             }
         }
 
@@ -65,7 +70,7 @@ function Cart() {
 
             toast.success(response.data.message)
         } catch (error) {
-            console.log(error.response.data.message)
+            console.log(error.response)
         }
 
         setIsShowDeleteCartModal(false)
@@ -73,21 +78,21 @@ function Cart() {
 
     return (
         <div className={cx('wrapper')}>
-            <div className={cx('content')}>
-                <div className={cx('cart')}>
-                    <h2 className={cx('cart-header')}>Giỏ hàng</h2>
+            {carts.length ? (
+                <div className={cx('content')}>
+                    <div className={cx('cart')}>
+                        <h2 className={cx('cart-header')}>Giỏ hàng</h2>
 
-                    <div className={cx('cart-list')}>
-                        <div className={cx('title')}>
-                            <span style={{ width: 'calc(40% - 10px)' }}>Sản phẩm</span>
-                            <span style={{ width: 'calc(20% - 10px)' }}>Tùy chọn</span>
-                            <span style={{ width: 'calc(12.5% - 10px)' }}>Đơn giá</span>
-                            <span style={{ width: 'calc(15% - 10px)' }}>Số lượng</span>
-                            <span style={{ width: 'calc(12.5% - 10px)' }}>Thành tiền</span>
-                        </div>
+                        <div className={cx('cart-list')}>
+                            <div className={cx('title')}>
+                                <span style={{ width: 'calc(40% - 10px)' }}>Sản phẩm</span>
+                                <span style={{ width: 'calc(20% - 10px)' }}>Tùy chọn</span>
+                                <span style={{ width: 'calc(12.5% - 10px)' }}>Đơn giá</span>
+                                <span style={{ width: 'calc(15% - 10px)' }}>Số lượng</span>
+                                <span style={{ width: 'calc(12.5% - 10px)' }}>Thành tiền</span>
+                            </div>
 
-                        {carts.length ? (
-                            carts.map((cart) => (
+                            {carts.map((cart) => (
                                 <CartItem
                                     key={cart._id}
                                     data={cart}
@@ -98,45 +103,53 @@ function Cart() {
                                     setCartsChecked={setCartsChecked}
                                     showDeleteCartModal={handleShowDeleteCartModal}
                                 />
-                            ))
-                        ) : (
-                            <div className={cx('empty-cart')}>
-                                <img src={images.empty_cart} alt='empty cart' />
-                                <p>Không có sản phẩm nào trong giỏ hàng.</p>
-                            </div>
-                        )}
+                            ))}
 
-                        <Modal title='Chú ý' showModal={isShowDeleteCartModal} closeModal={handleCloseDeleteCartModal}>
-                            <div className={cx('delete-cart')}>
-                                <h3>Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?</h3>
-                                <div className={cx('buttons')}>
-                                    <button onClick={handleCloseDeleteCartModal}>Hủy bỏ</button>
-                                    <button onClick={handleDeleteCart}>Đồng ý</button>
+                            <Modal
+                                title='Chú ý'
+                                showModal={isShowDeleteCartModal}
+                                closeModal={handleCloseDeleteCartModal}
+                            >
+                                <div className={cx('delete-cart')}>
+                                    <h3>Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?</h3>
+                                    <div className={cx('buttons')}>
+                                        <button onClick={handleCloseDeleteCartModal}>Hủy bỏ</button>
+                                        <button onClick={handleDeleteCart}>Đồng ý</button>
+                                    </div>
+                                </div>
+                            </Modal>
+                        </div>
+                    </div>
+
+                    <div className={cx('total')}>
+                        <h2 className={cx('total-header')}>Thanh toán</h2>
+                        <div className={cx('temporary')}>
+                            <div>
+                                <span>Tổng tạm tính</span>
+                            </div>
+
+                            <div>{formatPrice(totalPrice)}</div>
+                        </div>
+
+                        <div className={cx('official')}>
+                            <div className={cx('official-lable')}>
+                                <span>Thành tiền</span>
+                            </div>
+                            <div>
+                                <div className={cx('official-price')}>{formatPrice(totalPrice)}</div>
+                                <div className={cx('official-vat')}>
+                                    <span>(Đã bao gồm thuế VAT)</span>
                                 </div>
                             </div>
-                        </Modal>
-                    </div>
-                </div>
-
-                <div className={cx('total')}>
-                    <h2 className={cx('total-header')}>Thanh toán</h2>
-                    <div className={cx('temporary')}>
-                        <div>
-                            <span>Tổng tạm tính</span>
                         </div>
 
-                        <div>{formatPrice(totalPrice)}</div>
-                    </div>
-
-                    <div className={cx('official')}>
-                        <div className={cx('official-lable')}>
-                            <span>Thành tiền</span>
-                        </div>
-                        <div>
-                            <div className={cx('official-price')}>{formatPrice(totalPrice)}</div>
-                            <div className={cx('official-vat')}>
-                                <span>(Đã bao gồm thuế VAT)</span>
-                            </div>
+                        <div className={cx('continue', { disabled: !cartsChecked.length })}>
+                            <Link
+                                to={config.routes.checkout}
+                                state={{ cart_ids: cartsChecked, total_price: totalPrice }}
+                            >
+                                TIẾP TỤC
+                            </Link>
                         </div>
                     </div>
 
@@ -144,7 +157,12 @@ function Cart() {
                         <button>TIẾP TỤC</button>
                     </div>
                 </div>
-            </div>
+            ) : (
+                <div className={cx('empty-cart')}>
+                    <img src={images.empty_cart} alt='empty cart' />
+                    <p>Không có sản phẩm nào trong giỏ hàng.</p>
+                </div>
+            )}
         </div>
     )
 }
