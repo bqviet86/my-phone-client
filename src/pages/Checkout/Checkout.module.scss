@@ -98,12 +98,12 @@
                         display: flex;
 
                         & + .product {
-                            margin-top: 16px;
+                            margin-top: 32px;
 
                             &::before {
                                 content: '';
                                 position: absolute;
-                                bottom: calc(100% + 8px);
+                                bottom: calc(100% + 16px);
                                 width: 100%;
                                 height: 1px;
                                 background-color: #ddd;
@@ -228,6 +228,10 @@
         padding: 16px;
         width: 100%;
         height: calc(100vh - 240px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         border: 2px dashed #ddd;
         border-radius: 5px;
         background-color: #fff;

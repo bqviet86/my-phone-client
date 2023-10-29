@@ -86,7 +86,11 @@ function Header() {
                                                 <div className={cx('info')}>
                                                     <div className={cx('avatar')}>
                                                         <img
-                                                            src={`${process.env.REACT_APP_IMAGE_URL_PREFIX}/${user.avatar}`}
+                                                            src={
+                                                                user.avatar
+                                                                    ? `${process.env.REACT_APP_IMAGE_URL_PREFIX}/${user.avatar}`
+                                                                    : images.avatar
+                                                            }
                                                             alt='avatar'
                                                         />
                                                     </div>
@@ -112,7 +116,11 @@ function Header() {
                                         <div className={cx('user')}>
                                             <div className={cx('avatar')}>
                                                 <img
-                                                    src={`${process.env.REACT_APP_IMAGE_URL_PREFIX}/${user.avatar}`}
+                                                    src={
+                                                        user.avatar
+                                                            ? `${process.env.REACT_APP_IMAGE_URL_PREFIX}/${user.avatar}`
+                                                            : images.avatar
+                                                    }
                                                     alt='avatar'
                                                 />
                                             </div>

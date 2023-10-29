@@ -152,10 +152,6 @@ function Cart() {
                             </Link>
                         </div>
                     </div>
-
-                    <div className={cx('continue')}>
-                        <button>TIẾP TỤC</button>
-                    </div>
                 </div>
             ) : (
                 <div className={cx('empty-cart')}>

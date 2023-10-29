@@ -145,6 +145,10 @@
         padding: 16px;
         width: 100%;
         height: calc(100vh - 240px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         border: 2px dashed #ddd;
         border-radius: 5px;
         background-color: #fff;
