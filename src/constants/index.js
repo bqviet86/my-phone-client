@@ -58,3 +58,17 @@ export const PaymentMethodArray = [
         description: 'Thanh toán khi nhận hàng tại nhà (COD)'
     }
 ]
+
+export const PendingPayment = 0
+export const PendingConfirmation = 1
+export const Processing = 2
+export const Shipping = 3
+export const Completed = 4
+export const Cancelled = 5
+
+export const PendingPaymentName = 'Chờ thanh toán'
+export const PendingConfirmationName = 'Chờ xác nhận'
+export const ProcessingName = 'Đơn hàng đang xử lý'
+export const ShippingName = 'Đơn hàng đang vận chuyển'
+export const CompletedName = 'Đặt hàng thành công'
+export const CancelledName = 'Đơn hàng đã bị hủy'
