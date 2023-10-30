@@ -14,7 +14,7 @@ import ManageUser from '~/pages/Admin/pages/ManageUser'
 import AdminLayout from '~/layouts/AdminLayout/AdminLayout'
 import ManageOrder from '~/pages/Admin/pages/ManageOrder'
 import ManageProduct from '~/pages/Admin/pages/ManageProduct'
-import ManageBrand from '~/pages/Admin/pages/ManageBrand'
+import ManageBrand from '~/pages/Admin/pages/ManageBrand/ManageBrand'
 
 // Thêm unnecessary: true để báo là route này khi đã đăng nhập thì không cần truy cập nữa -> điều hướng về home
 // Thêm protected: true để báo là route này cần phải đăng nhập mới được truy cập -> điều hướng về login
