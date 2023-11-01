@@ -1,0 +1,170 @@
+.wrapper {
+    padding: 0 16px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrap {
+    width: 100%;
+    background-color: #111827;
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+
+        &.options {
+            padding: 0 16px;
+        }
+
+        h4 {
+            margin-left: 8px;
+            margin-bottom: 4px;
+            font-size: 1.4rem;
+
+            & ~ h4 {
+                margin-top: 16px;
+            }
+        }
+
+        input.input-file {
+            position: absolute;
+            visibility: hidden;
+        }
+
+        input,
+        input.input-file + label {
+            padding: 0 16px;
+            height: 40px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            outline: none;
+            border-radius: 5px;
+            border: 1px solid #1f2937;
+            color: #9ca3af;
+            background-color: #1f2937;
+            transition: all 0.2s ease-in-out;
+
+            &:focus {
+                border: 1px solid #2563eb;
+            }
+        }
+
+        .select {
+            height: 40px;
+
+            & > div {
+                padding: 0 16px;
+                height: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 1.4rem;
+                border: 1px solid #1f2937;
+                color: #9ca3af;
+                background-color: #1f2937;
+
+                span {
+                    font-size: 1.4rem;
+                    font-weight: 500;
+                    font-family: var(--font-family);
+                }
+            }
+
+            span {
+                font-size: 1.6rem;
+                color: #9ca3af;
+            }
+        }
+
+        .images-wrap {
+            margin: 16px 8px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            img {
+                margin: 0 8px;
+                width: calc(20% - 16px);
+                border-radius: 6px;
+                object-fit: cover;
+            }
+        }
+
+        .md-editor {
+            height: 600px;
+            border-radius: 8px;
+            overflow: hidden;
+
+            div:nth-child(2) {
+                section:nth-child(1) textarea {
+                    background: #fff;
+                    border: none;
+                    box-sizing: border-box;
+                    color: #333;
+                    display: block;
+                    font-size: 14px;
+                    height: 100%;
+                    line-height: 1.7;
+                    min-height: 0;
+                    outline: none;
+                    overflow-y: scroll;
+                    resize: none;
+                    width: 100%;
+                }
+
+                section:nth-child(2) > div > div {
+                    p {
+                        color: #292929;
+                        font-size: 16px;
+                        line-height: 1.8;
+                    }
+
+                    h3 {
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+
+        & > .btn {
+            margin-top: 16px;
+            padding: 0 16px;
+            min-width: 132px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.4rem;
+            font-weight: 500;
+            border-radius: 5px;
+            color: #fff;
+            background-color: rgb(22, 119, 255);
+            cursor: pointer;
+
+            &.btn-delete {
+                background-color: #e02424;
+            }
+        }
+    }
+}
+
+.select-option {
+    font-weight: 500 !important;
+    border: 1px solid #1f2937 !important;
+    color: #9ca3af !important;
+
+    &:hover {
+        color: #fff !important;
+        background-color: rgba(0, 0, 0, 0.1) !important;
+    }
+
+    &[aria-selected='true'] {
+        border: 1px solid #2563eb !important;
+        color: #fff !important;
+        background-color: rgba(0, 0, 0, 0.1) !important;
+    }
+}

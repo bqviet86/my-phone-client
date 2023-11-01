@@ -1,0 +1,125 @@
+.phone-option {
+    margin: 0 -8px;
+    display: flex;
+    flex-wrap: wrap;
+
+    .add-option-btn {
+        box-sizing: border-box;
+        margin: 16px 8px 0;
+        padding: 8px;
+        width: calc(25% - 16px);
+        aspect-ratio: 3 / 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        background-color: #1f2937;
+        cursor: pointer;
+        border-radius: 5px;
+
+        svg {
+            font-size: 2rem;
+        }
+
+        p {
+            font-size: 1.4rem;
+        }
+    }
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+
+    &.options {
+        padding: 0 16px;
+
+        .btn {
+            margin-top: 16px;
+            padding: 0 16px;
+            height: 40px;
+            font-size: 1.4rem;
+            font-weight: 500;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            color: #fff;
+            background-color: rgb(22, 119, 255);
+            cursor: pointer;
+
+            &.btn-delete {
+                margin-left: auto;
+                width: max-content;
+                background-color: #e02424;
+            }
+        }
+    }
+
+    .form-group {
+        position: relative;
+
+        & + .form-group {
+            margin-top: 16px;
+        }
+
+        h4 {
+            margin-left: 8px;
+            margin-bottom: 4px;
+            font-size: 1.4rem;
+        }
+
+        input.input-file {
+            position: absolute;
+            visibility: hidden;
+        }
+
+        input,
+        input.input-file + label,
+        select {
+            padding: 0 16px;
+            width: 100%;
+            height: 40px;
+            outline: none;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            border-radius: 5px;
+            border: 1px solid #1f2937;
+            color: #9ca3af;
+            background-color: #1f2937;
+            transition: all 0.2s ease-in-out;
+
+            &:focus {
+                border: 1px solid #2563eb;
+            }
+        }
+
+        span {
+            position: absolute;
+            bottom: 10px;
+            right: 16px;
+            height: 20px;
+            font-size: 1.4rem;
+            color: #9ca3af;
+            cursor: pointer;
+        }
+
+        .images-wrap {
+            margin: 0 8px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            img {
+                margin: 16px 8px 0;
+                width: calc(20% - 16px);
+                border-radius: 6px;
+                object-fit: cover;
+            }
+        }
+    }
+}

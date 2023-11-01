@@ -25,9 +25,9 @@
     max-width: calc(100vw - 16px);
     max-height: calc(100vh - 16px);
     border-radius: 8px;
-    background-color: #fff;
     scale: 0;
     opacity: 0.5;
+    overflow: hidden;
     transform: translate(-50%, -50%);
     transform-origin: 0 0;
     transition: all 0.3s ease-in-out;
@@ -50,12 +50,10 @@
         align-items: center;
         font-size: 2rem;
         border-radius: 0 8px 0 8px;
-        color: rgba(0, 0, 0, 0.5);
         cursor: pointer;
     }
 
     .title {
-        color: black;
         margin: 0;
         padding: 10px 10px 0 30px;
         font-size: 2rem;
@@ -73,5 +71,9 @@
     .content {
         height: 100%;
         overflow-y: overlay;
+
+        &::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
     }
 }
