@@ -1,9 +1,9 @@
-function formatPrice(number) {
+function formatPrice(number, suffix = true) {
     return (
         new Intl.NumberFormat('vi-VN', {
             currency: 'VND',
             minimumFractionDigits: 0
-        }).format(number) + 'đ'
+        }).format(Number(number)) + (suffix ? 'đ' : '')
     )
 }
 

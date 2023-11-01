@@ -39,7 +39,7 @@ function Checkout() {
         const getAddresses = async () => {
             const result = await fetchAllAddress()
 
-            setAddressChecked(result.find((address) => address.default)._id)
+            setAddressChecked(result.find((address) => address.default)?._id || '')
         }
 
         getAddresses()
