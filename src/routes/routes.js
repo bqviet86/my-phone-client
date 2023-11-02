@@ -1,6 +1,6 @@
 import config from '~/config'
 
-import DefaultLayout from '~/layouts'
+import DefaultLayout, { AdminLoginLayout } from '~/layouts'
 
 import Home from '~/pages/Home'
 import Login from '~/pages/Login'
@@ -10,6 +10,7 @@ import Cart from '~/pages/Cart'
 import Account, { AccountAddresses, AccountOrderDetail, AccountOrders } from '~/pages/Account'
 import Checkout from '~/pages/Checkout'
 import OrderSuccess from '~/pages/OrderSuccess'
+import AdminLogin from '~/pages/AdminLogin'
 import ManageUser from '~/pages/Admin/pages/ManageUser/ManageUser'
 import AdminLayout from '~/layouts/AdminLayout/AdminLayout'
 import ManageOrder from '~/pages/Admin/pages/ManageOrder/ManageOrder'
@@ -87,28 +88,34 @@ const routes = [
         protected: true
     },
     {
+        path: config.routes.adminLogin,
+        component: AdminLogin,
+        layout: AdminLoginLayout,
+        unnecessary: true
+    },
+    {
         path: config.routes.adminUser,
         component: ManageUser,
         layout: AdminLayout,
-        protected: false
+        onlyAdmin: true
     },
     {
         path: config.routes.adminOrder,
         component: ManageOrder,
         layout: AdminLayout,
-        protected: false
+        onlyAdmin: true
     },
     {
         path: config.routes.adminProduct,
         component: ManageProduct,
         layout: AdminLayout,
-        protected: false
+        onlyAdmin: true
     },
     {
         path: config.routes.adminBrand,
         component: ManageBrand,
         layout: AdminLayout,
-        protected: false
+        onlyAdmin: true
     }
 ]
 

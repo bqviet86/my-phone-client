@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { Toaster } from 'react-hot-toast'
 
 import Wrapper from './Wrapper'
+import { Role } from './constants'
 import config from './config'
 import { userSelector } from './redux/selectors'
 import routes from './routes'
@@ -24,14 +25,27 @@ function App() {
                 </Layout>
             )
 
-            // Điều hướng đến trang chủ nếu đã đăng nhập mà truy cập vào các trang không cần thiết như login, register, ...
-            if (currentUser && route.unnecessary) {
-                element = <Navigate to={config.routes.home} state={{ unnecessary: true }} />
+            // Nếu đã đăng nhập mà truy cập vào các trang không cần thiết như login, register, ...
+            if (route.unnecessary && currentUser) {
+                if (currentUser.role === Role.Admin) {
+                    element = <Navigate to={config.routes.adminUser} state={{ unnecessary: true }} />
+                } else {
+                    element = <Navigate to={config.routes.home} state={{ unnecessary: true }} />
+                }
             }
 
-            // Điều hướng đến trang login nếu chưa đăng nhập mà truy cập vào các trang đuợc bảo vệ như cart, account, ...
-            if (!currentUser && route.protected) {
+            // Nếu chưa đăng nhập mà truy cập vào các trang đuợc bảo vệ như cart, account, ...
+            if (route.protected && !currentUser) {
                 element = <Navigate to={config.routes.login} state={{ protected: true }} />
+            }
+
+            // Khi truy cập vào trang chỉ dành cho admin
+            if (route.onlyAdmin) {
+                if (!currentUser) {
+                    element = <Navigate to={config.routes.adminLogin} state={{ onlyAdmin: true }} />
+                } else if (currentUser.role !== Role.Admin) {
+                    element = <Navigate to={config.routes.home} state={{ onlyAdmin: true }} />
+                }
             }
 
             return (

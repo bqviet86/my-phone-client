@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import toast from 'react-hot-toast'
 import { Pagination } from 'antd'
@@ -18,6 +19,7 @@ const limit = 10
 
 const ManageProduct = () => {
     const queryParams = useQueryParams()
+    const navigate = useNavigate()
     const { page: pageQuery } = queryParams
 
     const [page, setPage] = useState(Number(pageQuery) || 1)
@@ -49,7 +51,8 @@ const ManageProduct = () => {
         }
 
         getPhones()
-        window.history.replaceState(null, '', `${config.routes.adminProduct}?page=${page}`)
+        navigate(`${config.routes.adminProduct}?page=${page}`)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page])
 
     const handleShowForm = async ({ phone_id, mode }) => {

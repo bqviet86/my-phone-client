@@ -201,12 +201,16 @@
         img {
             margin-top: 16px;
             width: 100%;
+            border-radius: 8px;
         }
     }
 }
 
 .info-detail-wrap {
+    position: sticky;
+    top: 80px;
     flex: 1;
+    height: max-content;
 
     .additional-display {
         margin-top: 12px;

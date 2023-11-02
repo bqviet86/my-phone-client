@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import api from '~/utils/api'
 
 function useBrands() {
@@ -6,7 +6,6 @@ function useBrands() {
     // const [brands, setBrands] = useState([])
     const [error, setError] = useState(null)
 
-    
     const fetchBrands = async () => {
         setLoading(true)
         try {
@@ -60,10 +59,10 @@ function useBrands() {
 
     const deleteBrand = async (id) => {
         setLoading(true)
-        console.log(id);
+        console.log(id)
         try {
             const response = await api.delete(`/brands/${id}`)
-            
+
             return {
                 success: true,
                 message: response.data.message

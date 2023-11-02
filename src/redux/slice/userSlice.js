@@ -7,11 +7,12 @@ const userSlice = createSlice({
     reducers: {
         login(state, action) {
             const { payload } = action
-            const { user_id } = jwtDecode(payload.access_token)
+            const { user_id, role } = jwtDecode(payload.access_token)
 
             return {
                 ...state,
                 user_id,
+                role,
                 ...payload
             }
         },

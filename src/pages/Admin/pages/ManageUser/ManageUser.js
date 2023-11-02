@@ -1,7 +1,18 @@
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
+import toast from 'react-hot-toast'
+
 const ManageUser = () => {
+    const location = useLocation()
+    const unnecessary = location.state?.unnecessary
 
-
-
+    useEffect(() => {
+        if (unnecessary) {
+            toast('Bạn đã đăng nhập rồi', { icon: '😅' })
+            window.history.replaceState(null, '', location.pathname)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <main className='h-full overflow-y-auto'>

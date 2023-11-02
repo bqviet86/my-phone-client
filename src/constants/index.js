@@ -1,5 +1,10 @@
 import images from '~/assets/images'
 
+export const Role = {
+    Admin: 0,
+    User: 1
+}
+
 export const userMenu = [
     {
         title: 'Thông tin tài khoản',

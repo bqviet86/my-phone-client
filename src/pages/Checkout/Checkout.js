@@ -191,7 +191,10 @@ function Checkout() {
 
                                 <p className={cx('text', 'vat')}>(Đã bao gồm thuế VAT)</p>
 
-                                <button className={cx('payment-btn')} onClick={handlePayment}>
+                                <button
+                                    className={cx('payment-btn', { disabled: !addressChecked })}
+                                    onClick={handlePayment}
+                                >
                                     Thanh toán
                                 </button>
                             </div>

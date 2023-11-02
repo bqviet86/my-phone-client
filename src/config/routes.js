@@ -10,6 +10,7 @@ const routes = {
     accountAddresses: '/account/addresses',
     checkout: '/checkout',
     orderSuccess: '/order-success',
+    adminLogin: '/admin-login',
     adminUser: '/admin-user',
     adminOrder: '/admin-order',
     adminProduct: '/admin-product',

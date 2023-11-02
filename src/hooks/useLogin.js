@@ -6,7 +6,7 @@ import api from '~/utils/api'
 import handleError from '~/utils/error'
 import { saveUser } from '~/utils/localStorages'
 
-function useLogin() {
+function useLogin(isAdmin = false) {
     const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
 
@@ -14,7 +14,7 @@ function useLogin() {
         setLoading(true)
 
         try {
-            const response = await api.post('/users/login', data)
+            const response = await api.post(`/users${isAdmin ? '/admin' : ''}/login`, data)
             const { access_token, refresh_token } = response.data.result
 
             saveUser(access_token, refresh_token)

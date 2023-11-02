@@ -1,0 +1,61 @@
+.wrapper {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+
+    .login-form {
+        margin: auto 0;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+
+        .title {
+            font-size: 2.4rem;
+            text-align: center;
+            color: #984ff6;
+        }
+
+        .input-wrap {
+            margin-top: 12px;
+
+            input {
+                padding: 0 10px;
+                width: 100%;
+                height: 40px;
+                font-size: 1.4rem;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                outline: none;
+                transition: all 0.2s ease-in-out;
+
+                &:focus {
+                    border-color: #984ff6;
+                }
+            }
+
+            .error,
+            & + .error {
+                margin: 2px 0 0 10px;
+                font-size: 1rem;
+                color: var(--red);
+            }
+        }
+
+        .submit {
+            margin: 12px auto 0;
+            width: 40%;
+            height: 40px;
+            font-size: 1.4rem;
+            border-radius: 20px;
+            color: #fff;
+            background-color: #984ff6;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+    }
+}

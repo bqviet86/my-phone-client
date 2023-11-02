@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import toast from 'react-hot-toast'
 import { Pagination } from 'antd'
@@ -20,7 +20,9 @@ const limit = 10
 function Home() {
     const location = useLocation()
     const queryParams = useQueryParams()
+    const navigate = useNavigate()
     const unnecessary = location.state?.unnecessary
+    const onlyAdmin = location.state?.onlyAdmin
     const { page: pageQuery, brand: brandQuery } = queryParams
 
     const [page, setPage] = useState(Number(pageQuery) || 1)
@@ -32,8 +34,13 @@ function Home() {
     useEffect(() => {
         if (unnecessary) {
             toast('Bạn đã đăng nhập rồi', { icon: '😅' })
-            window.history.replaceState(null, '', location.pathname)
         }
+
+        if (onlyAdmin) {
+            toast('Bạn không có quyền truy cập vào trang này', { icon: '🤣' })
+        }
+
+        window.history.replaceState(null, '', location.pathname)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -88,9 +95,7 @@ function Home() {
     }, [page, brandsChecked, brands])
 
     useEffect(() => {
-        window.history.replaceState(
-            null,
-            '',
+        navigate(
             `${config.routes.home}?page=${page}${
                 brandsChecked.length
                     ? `&brand=${brands

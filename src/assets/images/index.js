@@ -1,5 +1,6 @@
 const images = {
     logo: require('~/assets/images/logo.png'),
+    logo_dark: require('~/assets/images/logo-dark.png'),
     register: require('~/assets/images/register.png'),
     login: require('~/assets/images/login.png'),
     avatar: require('~/assets/images/avatar.png'),
@@ -10,7 +11,8 @@ const images = {
     info_1: require('~/assets/images/info-1.png'),
     info_2: require('~/assets/images/info-2.png'),
     empty_cart: require('~/assets/images/empty-cart.png'),
-    no_products_found: require('~/assets/images/no-products-found.png')
+    no_products_found: require('~/assets/images/no-products-found.png'),
+    admin_login_bg: require('~/assets/images/admin-login-bg.png')
 }
 
 export default images

@@ -10,7 +10,7 @@ const Sidebar = () => {
         <aside className='z-20 hidden w-96 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0'>
             <div className='py-4 text-gray-500 dark:text-gray-400'>
                 <p className='ml-6 text-lg font-bold text-gray-800 dark:text-gray-200'>
-                    <img src={images.logo} alt='logo' />
+                    <img src={images.logo_dark} alt='logo' />
                 </p>
                 <ul className='mt-8'>
                     <li className='relative px-6 py-3 my-3'>
@@ -65,7 +65,7 @@ const Sidebar = () => {
                             <span className='ml-4'>Sản phẩm</span>
                         </Link>
                     </li>
-                    <li className='relative px-6 py-3'>
+                    <li className='relative px-6 py-3 my-3'>
                         {pathname === routes.adminBrand && (
                             <span
                                 className='absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg'
