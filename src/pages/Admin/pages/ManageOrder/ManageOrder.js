@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import api from '~/utils/api'
-import formatDate from '~/utils/formatDate'
 import formatPrice from '~/utils/formatPrice'
 import {
     CancelledName,
@@ -12,6 +11,7 @@ import {
 } from '~/constants'
 import { Modal } from 'antd'
 import ProductDetail from './ProductDetail'
+import formatTime from '~/utils/formatTime'
 const ManageOrder = () => {
     const [orders, setOrders] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -118,7 +118,7 @@ const ManageOrder = () => {
                                             </span>
                                         </td>
                                         <td className='px-4 py-7'>{formatPrice(order.payment.total_price)}</td>
-                                        <td className='px-4 py-7'>{formatDate(order.created_at)}</td>
+                                        <td className='px-4 py-7'>{formatTime(order.created_at, true)}</td>
                                         <td className='px-4 py-7 flex gap-2 items-center'>
                                             <button
                                                 onClick={() => {

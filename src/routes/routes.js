@@ -59,14 +59,12 @@ const routes = [
             {
                 path: config.routes.accountOrders,
                 component: AccountOrders,
-                protected: true,
-                children: [
-                    {
-                        path: config.routes.accountOrderDetail,
-                        component: AccountOrderDetail,
-                        protected: true
-                    }
-                ]
+                protected: true
+            },
+            {
+                path: config.routes.accountOrderDetail,
+                component: AccountOrderDetail,
+                protected: true
             },
             {
                 path: config.routes.accountAddresses,

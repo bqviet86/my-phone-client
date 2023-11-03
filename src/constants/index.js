@@ -5,6 +5,16 @@ export const Role = {
     User: 1
 }
 
+export const SexEnum = {
+    Male: 0,
+    Female: 1
+}
+
+export const Sex = {
+    [SexEnum.Male]: 'Nam',
+    [SexEnum.Female]: 'Nữ'
+}
+
 export const userMenu = [
     {
         title: 'Thông tin tài khoản',
@@ -63,6 +73,42 @@ export const PaymentMethodArray = [
         description: 'Thanh toán khi nhận hàng tại nhà (COD)'
     }
 ]
+
+export const OrderStatusEnum = {
+    PendingPayment: 0, // Chờ thanh toán (chỉ áp dụng cho thanh toán bằng thẻ tín dụng)
+    PendingConfirmation: 1, // Chờ xác nhận
+    Processing: 2, // Đang lấy hàng
+    Shipping: 3, // Đang giao hàng
+    Completed: 4, // Đã giao hàng
+    Cancelled: 5 // Đã hủy
+}
+
+export const OrderStatus = {
+    [OrderStatusEnum.PendingPayment]: {
+        title: 'Chờ thanh toán',
+        style: 'text-white bg-blue-500'
+    },
+    [OrderStatusEnum.PendingConfirmation]: {
+        title: 'Chờ xác nhận',
+        style: 'text-white bg-violet-500'
+    },
+    [OrderStatusEnum.Processing]: {
+        title: 'Đang lấy hàng',
+        style: 'text-white bg-pink-500'
+    },
+    [OrderStatusEnum.Shipping]: {
+        title: 'Đang giao hàng',
+        style: 'text-white bg-amber-500'
+    },
+    [OrderStatusEnum.Completed]: {
+        title: 'Đã nhận hàng',
+        style: 'text-white bg-teal-500'
+    },
+    [OrderStatusEnum.Cancelled]: {
+        title: 'Đã hủy',
+        style: 'text-white bg-red-500'
+    }
+}
 
 export const PendingPayment = 0
 export const PendingConfirmation = 1

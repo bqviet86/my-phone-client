@@ -171,6 +171,11 @@ function ManageBrand() {
                                                         backgroundColor: '#1677ff'
                                                     }
                                                 }}
+                                                styles={{
+                                                    mask: {
+                                                        backgroundColor: 'rgba(0, 0, 0, 0.15)'
+                                                    }
+                                                }}
                                             >
                                                 <h3>Bạn có chắc chắn muốn xóa thương hiệu này không? </h3>
                                             </Modal>
