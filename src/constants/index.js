@@ -110,6 +110,15 @@ export const OrderStatus = {
     }
 }
 
+export const OrderStatusQueryParams = {
+    pending_payment: OrderStatusEnum.PendingPayment,
+    pending_confirmation: OrderStatusEnum.PendingConfirmation,
+    processing: OrderStatusEnum.Processing,
+    shipping: OrderStatusEnum.Shipping,
+    completed: OrderStatusEnum.Completed,
+    cancelled: OrderStatusEnum.Cancelled
+}
+
 export const PendingPayment = 0
 export const PendingConfirmation = 1
 export const Processing = 2

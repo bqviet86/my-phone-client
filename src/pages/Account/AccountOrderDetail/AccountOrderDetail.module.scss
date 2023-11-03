@@ -11,6 +11,11 @@
         border-radius: 5px;
         border: 1px solid #ccc;
 
+        &:hover {
+            border-color: var(--blue);
+            color: var(--blue);
+        }
+
         svg {
             font-size: 2rem;
         }
