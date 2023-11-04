@@ -74,49 +74,54 @@ export const PaymentMethodArray = [
     }
 ]
 
-export const OrderStatusEnum = {
-    PendingPayment: 0, // Chờ thanh toán (chỉ áp dụng cho thanh toán bằng thẻ tín dụng)
-    PendingConfirmation: 1, // Chờ xác nhận
-    Processing: 2, // Đang lấy hàng
-    Shipping: 3, // Đang giao hàng
-    Completed: 4, // Đã giao hàng
-    Cancelled: 5 // Đã hủy
+export const PaymentStatus = {
+    PendingPayment: 0, // Chưa thanh toán
+    Paid: 1 // Đã thanh toán
 }
 
 export const OrderStatus = {
-    [OrderStatusEnum.PendingPayment]: {
+    // Chờ thanh toán (chỉ áp dụng cho thanh toán bằng thẻ tín dụng)
+    PendingPayment: {
+        id: 0,
         title: 'Chờ thanh toán',
-        style: 'text-white bg-blue-500'
+        style: 'text-white bg-blue-500',
+        tab: 'pending_payment'
     },
-    [OrderStatusEnum.PendingConfirmation]: {
+    // Chờ xác nhận
+    PendingConfirmation: {
+        id: 1,
         title: 'Chờ xác nhận',
-        style: 'text-white bg-violet-500'
+        style: 'text-white bg-violet-500',
+        tab: 'pending_confirmation'
     },
-    [OrderStatusEnum.Processing]: {
+    // Đang lấy hàng
+    Processing: {
+        id: 2,
         title: 'Đang lấy hàng',
-        style: 'text-white bg-pink-500'
+        style: 'text-white bg-pink-500',
+        tab: 'processing'
     },
-    [OrderStatusEnum.Shipping]: {
+    // Đang giao hàng
+    Shipping: {
+        id: 3,
         title: 'Đang giao hàng',
-        style: 'text-white bg-amber-500'
+        style: 'text-white bg-amber-500',
+        tab: 'shipping'
     },
-    [OrderStatusEnum.Completed]: {
+    // Đã nhận hàng
+    Completed: {
+        id: 4,
         title: 'Đã nhận hàng',
-        style: 'text-white bg-teal-500'
+        style: 'text-white bg-teal-500',
+        tab: 'completed'
     },
-    [OrderStatusEnum.Cancelled]: {
+    // Đã hủy
+    Cancelled: {
+        id: 5,
         title: 'Đã hủy',
-        style: 'text-white bg-red-500'
+        style: 'text-white bg-red-500',
+        tab: 'cancelled'
     }
-}
-
-export const OrderStatusQueryParams = {
-    pending_payment: OrderStatusEnum.PendingPayment,
-    pending_confirmation: OrderStatusEnum.PendingConfirmation,
-    processing: OrderStatusEnum.Processing,
-    shipping: OrderStatusEnum.Shipping,
-    completed: OrderStatusEnum.Completed,
-    cancelled: OrderStatusEnum.Cancelled
 }
 
 export const PendingPayment = 0

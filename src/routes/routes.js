@@ -9,9 +9,10 @@ import PhoneDetail from '~/pages/PhoneDetail'
 import Cart from '~/pages/Cart'
 import Account, { AccountAddresses, AccountOrderDetail, AccountOrders } from '~/pages/Account'
 import Checkout from '~/pages/Checkout'
+import ConfirmPayment from '~/pages/ConfirmPayment'
 import OrderSuccess from '~/pages/OrderSuccess'
 import AdminLogin from '~/pages/AdminLogin'
-import ManageUser from '~/pages/Admin/pages/ManageUser/ManageUser'
+import ManageUser from '~/pages/Admin/pages/ManageUser'
 import AdminLayout from '~/layouts/AdminLayout/AdminLayout'
 import ManageOrder from '~/pages/Admin/pages/ManageOrder/ManageOrder'
 import ManageProduct from '~/pages/Admin/pages/ManageProduct'
@@ -76,6 +77,12 @@ const routes = [
     {
         path: config.routes.checkout,
         component: Checkout,
+        layout: DefaultLayout,
+        protected: true
+    },
+    {
+        path: config.routes.confirmPayment,
+        component: ConfirmPayment,
         layout: DefaultLayout,
         protected: true
     },

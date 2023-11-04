@@ -1,26 +1,33 @@
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import { Icon } from '@iconify/react'
 
-import { OrderStatus } from '~/constants'
+import { OrderStatus, PaymentMethodArray } from '~/constants'
 import api from '~/utils/api'
 import formatTime from '~/utils/formatTime'
-import styles from './AccountOrderDetail.module.scss'
 import formatPrice from '~/utils/formatPrice'
+import styles from './AccountOrderDetail.module.scss'
 
 const cx = classNames.bind(styles)
 
+const OrderStatusValues = Object.values(OrderStatus)
+
 function AccountOrderDetail() {
     const { order_id } = useParams()
+    const navigate = useNavigate()
 
     const [order, setOrder] = useState()
+    const [orderStatusValue, setOrderStatusValue] = useState()
 
     useEffect(() => {
         const getOrder = async () => {
             try {
                 const response = await api.get(`/orders/${order_id}`)
-                setOrder(response.data.result)
+                const orderResponse = response.data.result
+
+                setOrder(orderResponse)
+                setOrderStatusValue(OrderStatusValues.find((item) => item.id === orderResponse.order_status))
             } catch (err) {
                 console.log(err.response)
             }
@@ -29,14 +36,12 @@ function AccountOrderDetail() {
         getOrder()
     }, [order_id])
 
-    console.log(order)
-
     return (
         <div className={cx('wrapper')}>
             <div className='flex items-center'>
-                <Link to='/account/orders' className={cx('back-btn')}>
+                <button className={cx('back-btn')} onClick={() => navigate(-1)}>
                     <Icon icon='mingcute:left-line' />
-                </Link>
+                </button>
                 <h2 className='font-semibold text-4xl'>Đơn hàng: {order_id}</h2>
             </div>
 
@@ -47,7 +52,7 @@ function AccountOrderDetail() {
                             <h2>Thông tin người nhận</h2>
                             <p className={cx('text')}>
                                 <strong>Người nhận: </strong>
-                                {order.user.name}
+                                {order.address.name}
                             </p>
                             <p className={cx('text')}>
                                 <strong>Địa chỉ: </strong>
@@ -62,11 +67,23 @@ function AccountOrderDetail() {
                             <h2>Thông tin đơn hàng</h2>
                             <p className={cx('text')}>
                                 <strong>Trạng thái đơn hàng: </strong>
-                                {OrderStatus[order.order_status].title}
+                                <span
+                                    className={`px-2 py-1 text-[1.1rem] font-medium rounded-full ${orderStatusValue?.style}`}
+                                >
+                                    {orderStatusValue?.title}
+                                </span>
                             </p>
                             <p className={cx('text')}>
                                 <strong>Thời gian tạo: </strong>
                                 {formatTime(order.created_at, true)}
+                            </p>
+                            <p className={cx('text')}>
+                                <strong>Phương thức thanh toán: </strong>
+                                {PaymentMethodArray.find((item) => item.id === order.payment.payment_method)?.name}
+                            </p>
+                            <p className={cx('text')}>
+                                <strong>Thông tin ghí chú: </strong>
+                                {order.content}
                             </p>
                         </div>
                     </div>
@@ -114,6 +131,14 @@ function AccountOrderDetail() {
                             <span className={cx('total-price')}>{formatPrice(order.payment.total_price)}</span>
                         </div>
                         <p className={cx('vat')}>(Đã bao gồm VAT)</p>
+                        <button
+                            className={cx('payment-btn', {
+                                hidden: order.order_status !== OrderStatus.PendingPayment.id
+                            })}
+                            onClick={() => navigate(`/confirm-payment/${order_id}`)}
+                        >
+                            Thanh toán ngay
+                        </button>
                     </div>
                 </>
             )}

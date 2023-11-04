@@ -150,6 +150,7 @@
                 margin: 8px auto 0;
                 padding: 4px 8px;
                 width: max-content;
+                font-size: 1.33rem;
                 border-radius: 4px;
                 color: #fff;
                 background-color: var(--blue);
@@ -242,6 +243,7 @@
             display: flex;
             border-radius: 4px;
             border: 2px solid #ddd;
+            overflow: hidden;
 
             button,
             .quantity-input {

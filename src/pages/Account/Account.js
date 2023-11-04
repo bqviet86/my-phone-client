@@ -8,7 +8,7 @@ function Account() {
     return (
         <div className='mt-[80px] grid grid-cols-4 min-h-[600px] px-32 gap-8'>
             <div className='my-[40px] col-span-1'>
-                <ul className='text-black bg-white border border-gray-200 rounded-lg'>
+                <ul className='text-black bg-white border border-gray-200 rounded-lg shadow-md'>
                     <li className='w-full px-8 py-4 hover:bg-gray-100 cursor-pointer hover:text-blue-500 transition-all ease-in-out hover:font-semibold border-b border-gray-200 flex gap-2 items-center'>
                         <Link to={routes.account} className='flex items-center gap-2 w-full'>
                             <span>

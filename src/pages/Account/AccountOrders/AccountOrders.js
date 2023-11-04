@@ -2,16 +2,18 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames/bind'
 
-import { OrderStatus, OrderStatusQueryParams } from '~/constants'
+import images from '~/assets/images'
+import config from '~/config'
+import { OrderStatus } from '~/constants'
 import useQueryParams from '~/hooks/useQueryParams'
 import api from '~/utils/api'
 import formatTime from '~/utils/formatTime'
 import formatPrice from '~/utils/formatPrice'
 import styles from './AccountOrders.module.scss'
-import config from '~/config'
-import images from '~/assets/images'
 
 const cx = classNames.bind(styles)
+
+const OrderStatusValues = Object.values(OrderStatus)
 
 function AccountOrders() {
     const { tab } = useQueryParams()
@@ -23,7 +25,7 @@ function AccountOrders() {
             try {
                 const response = await api.get('/orders', {
                     params: {
-                        order_status: OrderStatusQueryParams[tab]
+                        order_status: OrderStatusValues.find((item) => item.tab === tab)?.id ?? ''
                     }
                 })
 
@@ -43,18 +45,16 @@ function AccountOrders() {
             </div>
 
             <div className={cx('status-btn')}>
-                {Object.entries(OrderStatus).map((status, index) => {
-                    const tabValue = Object.entries(OrderStatusQueryParams).find(
-                        (item) => `${item[1]}` === status[0]
-                    )[0]
+                {OrderStatusValues.map((status) => {
+                    const tabValue = status.tab
 
                     return (
                         <Link
-                            key={index}
+                            key={status.id}
                             to={`${config.routes.accountOrders}?tab=${tabValue}`}
                             className={cx('btn', { active: tabValue === tab })}
                         >
-                            {status[1].title}
+                            {status.title}
                         </Link>
                     )
                 })}
@@ -71,19 +71,27 @@ function AccountOrders() {
                     </div>
 
                     {orders.map((order) => {
-                        const order_status = OrderStatus[order.order_status]
+                        const created_at = formatTime(order.created_at, true)
                         const order_name = `${order.carts[0].phone.name} ${
                             order.carts.length > 1 ? `và ${order.carts.length - 1} sản phẩm khác` : ''
                         }`
+                        const total_price = formatPrice(order.payment.total_price, false)
+                        const order_status = OrderStatusValues.find((item) => item.id === order.order_status)
 
                         return (
                             <div key={order._id} className={cx('order')}>
-                                <Link to={`/account/orders/${order._id}`}>{order._id}</Link>
-                                <p className={cx('text')}>{formatTime(order.created_at, true)}</p>
+                                <Link to={`/account/orders/${order._id}`} title={order._id}>
+                                    {order._id}
+                                </Link>
+                                <p className={cx('text')} title={created_at}>
+                                    {created_at}
+                                </p>
                                 <p className={cx('text', 'name')} title={order_name}>
                                     {order_name}
                                 </p>
-                                <p className={cx('text')}>{formatPrice(order.payment.total_price, false)}</p>
+                                <p className={cx('text')} title={total_price}>
+                                    {total_price}
+                                </p>
                                 <p
                                     className={`${cx(
                                         'text',

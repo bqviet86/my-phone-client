@@ -9,6 +9,7 @@ const routes = {
     accountOrderDetail: '/account/orders/:order_id',
     accountAddresses: '/account/addresses',
     checkout: '/checkout',
+    confirmPayment: '/confirm-payment/:order_id',
     orderSuccess: '/order-success',
     adminLogin: '/admin-login',
     adminUser: '/admin-user',

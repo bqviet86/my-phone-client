@@ -1,24 +1,24 @@
 import { useEffect, useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import classNames from 'classnames/bind'
 
 import AddressList from '~/components/AddressList'
 import PaymentMethod from '~/components/PaymentMethod'
 import images from '~/assets/images'
 import config from '~/config'
-import { PaymentMethods } from '~/constants'
+import { PaymentMethods, PaymentStatus } from '~/constants'
 import useAccount from '~/hooks/useAccount'
 import api from '~/utils/api'
 import formatPrice from '~/utils/formatPrice'
-import styles from './Checkout.module.scss'
+import styles from './ConfirmPayment.module.scss'
 
 const cx = classNames.bind(styles)
 
-function Checkout() {
-    const location = useLocation()
+function ConfirmPayment() {
+    const { order_id } = useParams()
     const navigate = useNavigate()
-    const { cart_ids, total_price } = location.state || {}
 
+    const [order, setOrder] = useState()
     const [addresses, setAddresses] = useState([])
     const [addressChecked, setAddressChecked] = useState('')
     const [content, setContent] = useState('')
@@ -36,46 +36,36 @@ function Checkout() {
     }
 
     useEffect(() => {
-        const getAddresses = async () => {
-            const result = await fetchAllAddress()
-
-            setAddressChecked(result.find((address) => address.default)?._id || '')
-        }
-
-        getAddresses()
+        fetchAllAddress()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
-        if (cart_ids) {
-            const getProducts = async () => {
-                try {
-                    const response = await api.get('/carts', {
-                        params: {
-                            carts: cart_ids.join('|')
-                        }
-                    })
+        const getOrder = async () => {
+            try {
+                const response = await api.get(`/orders/${order_id}`)
+                const orderResponse = response.data.result
 
-                    setProducts(response.data.result)
-                } catch (error) {
-                    console.log(error.response)
-                }
+                setOrder(orderResponse)
+                setAddressChecked(orderResponse.address._id)
+                setContent(orderResponse.content)
+                setPaymentMethod(orderResponse.payment.payment_method)
+                setProducts(orderResponse.carts)
+            } catch (err) {
+                console.log(err.response)
             }
-
-            getProducts()
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
 
-    const handlePayment = async () => {
+        getOrder()
+    }, [order_id])
+
+    const handleConfirmPayment = async () => {
         try {
-            const response = await api.post(`/orders/${paymentMethod}`, {
-                carts: cart_ids,
+            const response = await api.put(`/orders/confirm-payment/${order_id}/${paymentMethod}`, {
+                carts: products.map((product) => product._id),
                 address: addressChecked,
                 content
             })
-
-            window.history.replaceState(null, '', location.pathname)
 
             const { order, payment_url } = response.data.result
 
@@ -96,7 +86,7 @@ function Checkout() {
 
     return (
         <div className={cx('wrapper')}>
-            {cart_ids && total_price ? (
+            {order && order.payment.payment_status === PaymentStatus.PendingPayment ? (
                 <div className={cx('content')}>
                     <div className={cx('left')}>
                         <div className={cx('address-wrap')}>
@@ -124,14 +114,10 @@ function Checkout() {
                             <PaymentMethod paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} />
                         </div>
                     </div>
-
                     <div className={cx('right')}>
                         <div className={cx('order-info')}>
                             <div className={cx('heading')}>
                                 <h2>Thông tin đơn hàng</h2>
-                                <Link to='/cart' state={{ cart_ids }}>
-                                    Chỉnh sửa
-                                </Link>
                             </div>
 
                             <div className={cx('product-list')}>
@@ -176,7 +162,7 @@ function Checkout() {
                             <div className={cx('details')}>
                                 <p className={cx('text')}>
                                     <span>Tạm tính</span>
-                                    <span>{formatPrice(total_price)}</span>
+                                    <span>{formatPrice(order.payment.total_price)}</span>
                                 </p>
 
                                 <p className={cx('text')}>
@@ -186,16 +172,16 @@ function Checkout() {
 
                                 <p className={cx('text', 'total-price')}>
                                     <span>Tổng thanh toán</span>
-                                    <span>{formatPrice(total_price)}</span>
+                                    <span>{formatPrice(order.payment.total_price)}</span>
                                 </p>
 
                                 <p className={cx('text', 'vat')}>(Đã bao gồm thuế VAT)</p>
 
                                 <button
                                     className={cx('payment-btn', { disabled: !addressChecked })}
-                                    onClick={handlePayment}
+                                    onClick={handleConfirmPayment}
                                 >
-                                    Thanh toán
+                                    Thanh toán ngay
                                 </button>
                             </div>
                         </div>
@@ -211,4 +197,4 @@ function Checkout() {
     )
 }
 
-export default Checkout
+export default ConfirmPayment
