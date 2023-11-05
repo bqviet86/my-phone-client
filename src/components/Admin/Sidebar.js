@@ -22,7 +22,9 @@ const Sidebar = () => {
                         )}
                         <Link
                             to='/admin-user'
-                            className='inline-flex items-center w-full font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100'
+                            className={`inline-flex items-center w-full font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 ${
+                                pathname === routes.adminUser && 'dark:text-gray-100'
+                            }`}
                         >
                             <svg
                                 className='w-7 h-7'
@@ -47,7 +49,9 @@ const Sidebar = () => {
                             ></span>
                         )}
                         <Link
-                            className='inline-flex items-center w-full font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200'
+                            className={`inline-flex items-center w-full font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 ${
+                                pathname === routes.adminProduct && 'dark:text-gray-100'
+                            }`}
                             to={'/admin-product'}
                         >
                             <svg
@@ -74,7 +78,9 @@ const Sidebar = () => {
                         )}
                         <Link
                             to='/admin-brand'
-                            className='inline-flex items-center w-full font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200'
+                            className={`inline-flex items-center w-full font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 ${
+                                pathname === routes.adminBrand && 'dark:text-gray-100'
+                            }`}
                         >
                             <svg
                                 className='w-7 h-7'
@@ -100,7 +106,9 @@ const Sidebar = () => {
                         )}
                         <Link
                             to='/admin-order'
-                            className='inline-flex items-center w-full font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200'
+                            className={`inline-flex items-center w-full font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 ${
+                                pathname === routes.adminOrder && 'dark:text-gray-100'
+                            }`}
                         >
                             <svg
                                 className='w-7 h-7'

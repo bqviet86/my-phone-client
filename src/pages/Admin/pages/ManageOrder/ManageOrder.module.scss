@@ -1,0 +1,40 @@
+.one-line {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    word-break: break-all;
+}
+
+.status-btn {
+    margin-top: 16px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+
+    .btn {
+        padding: 0 12px;
+        height: 32px;
+        font-size: 1.33rem;
+        font-family: 'Poppins', sans-serif;
+        line-height: 32px;
+        border-radius: 28px;
+        color: #9ca3af;
+        background-color: #1f2937;
+
+        & + .btn {
+            margin-left: 4px;
+        }
+
+        &:hover {
+            border-color: var(--blue);
+            color: var(--blue);
+        }
+
+        &.active {
+            color: #fff;
+            background-color: var(--blue);
+        }
+    }
+}

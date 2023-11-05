@@ -4,7 +4,7 @@ function AdminLayout({ children }) {
     return (
         <div className='flex h-screen bg-gray-50 dark:bg-gray-900 font-sans'>
             <Sidebar />
-            <div className='flex flex-col flex-1 w-full'>{children}</div>
+            <div className='flex flex-col flex-1 w-full overflow-y-auto'>{children}</div>
         </div>
     )
 }

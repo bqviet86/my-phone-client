@@ -1,6 +1,6 @@
 import config from '~/config'
 
-import DefaultLayout, { AdminLoginLayout } from '~/layouts'
+import DefaultLayout, { AdminLayout, AdminLoginLayout } from '~/layouts'
 
 import Home from '~/pages/Home'
 import Login from '~/pages/Login'
@@ -13,13 +13,14 @@ import ConfirmPayment from '~/pages/ConfirmPayment'
 import OrderSuccess from '~/pages/OrderSuccess'
 import AdminLogin from '~/pages/AdminLogin'
 import ManageUser from '~/pages/Admin/pages/ManageUser'
-import AdminLayout from '~/layouts/AdminLayout/AdminLayout'
-import ManageOrder from '~/pages/Admin/pages/ManageOrder/ManageOrder'
+import ManageOrder from '~/pages/Admin/pages/ManageOrder'
+import ManageOrderDetail from '~/pages/Admin/pages/ManageOrderDetail'
 import ManageProduct from '~/pages/Admin/pages/ManageProduct'
 import ManageBrand from '~/pages/Admin/pages/ManageBrand/ManageBrand'
 
-// Thêm unnecessary: true để báo là route này khi đã đăng nhập thì không cần truy cập nữa -> điều hướng về home
-// Thêm protected: true để báo là route này cần phải đăng nhập mới được truy cập -> điều hướng về login
+// Thêm unnecessary: true để báo là route này khi đã đăng nhập thì không cần truy cập nữa
+// Thêm protected: true để báo là route này cần phải đăng nhập mới được truy cập
+// Thêm onlyAdmin: true để báo là route này chỉ có admin mới được truy cập
 // Children: [] chứa các route con của nó
 
 const routes = [
@@ -107,6 +108,12 @@ const routes = [
     {
         path: config.routes.adminOrder,
         component: ManageOrder,
+        layout: AdminLayout,
+        onlyAdmin: true
+    },
+    {
+        path: config.routes.adminOrderDetail,
+        component: ManageOrderDetail,
         layout: AdminLayout,
         onlyAdmin: true
     },

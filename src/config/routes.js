@@ -14,6 +14,7 @@ const routes = {
     adminLogin: '/admin-login',
     adminUser: '/admin-user',
     adminOrder: '/admin-order',
+    adminOrderDetail: '/admin-order/:order_id',
     adminProduct: '/admin-product',
     adminBrand: '/admin-brand'
 }
