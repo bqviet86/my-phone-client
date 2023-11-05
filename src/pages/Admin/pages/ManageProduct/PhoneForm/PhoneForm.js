@@ -36,7 +36,7 @@ const initialDataPhone = {
 function PhoneForm({ data, mode, phones, setPhones, setIsShowForm }) {
     const [dataPhone, setDataPhone] = useState(initialDataPhone)
     const [brands, setBrands] = useState([])
-    const [selectedBrand, setSelectedBrand] = useState('Chọn thương hiệu')
+    const [selectedBrand, setSelectedBrand] = useState('')
     const [uploadImageValue, setUploadImageValue] = useState('Chọn ảnh')
     const [selectedImage, setSelectedImage] = useState('')
     const [options, setOptions] = useState([])
@@ -186,7 +186,7 @@ function PhoneForm({ data, mode, phones, setPhones, setIsShowForm }) {
                     <h4>Thương hiệu</h4>
                     <Select
                         className={cx('select')}
-                        defaultValue={selectedBrand}
+                        value={selectedBrand || 'Chọn thương hiệu'}
                         onChange={(value) => setSelectedBrand(value)}
                         dropdownStyle={{ backgroundColor: '#1f2937' }}
                     >

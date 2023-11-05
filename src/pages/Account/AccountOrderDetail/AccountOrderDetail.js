@@ -49,18 +49,22 @@ function AccountOrderDetail() {
                 <>
                     <div className={cx('info')}>
                         <div className={cx('info-item')}>
-                            <h2>Thông tin người nhận</h2>
+                            <h2>Thông tin giao hàng</h2>
                             <p className={cx('text')}>
                                 <strong>Người nhận: </strong>
                                 {order.address.name}
                             </p>
                             <p className={cx('text')}>
-                                <strong>Địa chỉ: </strong>
-                                {order.address.specific_address}
+                                <strong>Email: </strong>
+                                {order.address.email}
                             </p>
                             <p className={cx('text')}>
-                                <strong>Điện thoại: </strong>
+                                <strong>Số điện thoại: </strong>
                                 {order.address.phone_number}
+                            </p>
+                            <p className={cx('text')}>
+                                <strong>Địa chỉ: </strong>
+                                {order.address.specific_address}
                             </p>
                         </div>
                         <div className={cx('info-item')}>
