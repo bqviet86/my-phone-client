@@ -23,6 +23,7 @@ function Header() {
 
     const [user, setUser] = useState()
     const [isLogout, setIsLogout] = useState(false)
+    const [searchValue, setSearchValue] = useState('')
 
     useEffect(() => {
         if (currentUser?.user_id) {
@@ -66,12 +67,35 @@ function Header() {
         setIsLogout(true)
     }
 
+    const handleSearch = () => {
+        if (searchValue.trim()) {
+            navigate(`${config.routes.search}?q=${searchValue}`)
+        }
+    }
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('content')}>
                 <Link to='/' className={cx('logo')}>
                     <img src={images.logo} alt='logo' />
                 </Link>
+
+                <div className={cx('search-wrap')}>
+                    <input
+                        className={cx('search-input')}
+                        placeholder='Tìm kiếm điện thoại'
+                        value={searchValue}
+                        onChange={(e) => setSearchValue(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                handleSearch()
+                            }
+                        }}
+                    />
+                    <button className={cx('search-button')} onClick={handleSearch}>
+                        <Icon icon='mdi:magnify' />
+                    </button>
+                </div>
 
                 <div className={cx('right')}>
                     {currentUser ? (

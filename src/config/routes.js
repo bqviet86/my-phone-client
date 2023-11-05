@@ -16,7 +16,8 @@ const routes = {
     adminOrder: '/admin-order',
     adminOrderDetail: '/admin-order/:order_id',
     adminProduct: '/admin-product',
-    adminBrand: '/admin-brand'
+    adminBrand: '/admin-brand',
+    search: '/search'
 }
 
 export default routes

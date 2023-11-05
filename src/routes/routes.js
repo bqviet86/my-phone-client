@@ -17,6 +17,7 @@ import ManageOrder from '~/pages/Admin/pages/ManageOrder'
 import ManageOrderDetail from '~/pages/Admin/pages/ManageOrderDetail'
 import ManageProduct from '~/pages/Admin/pages/ManageProduct'
 import ManageBrand from '~/pages/Admin/pages/ManageBrand/ManageBrand'
+import Search from '~/pages/Search'
 
 // Thêm unnecessary: true để báo là route này khi đã đăng nhập thì không cần truy cập nữa
 // Thêm protected: true để báo là route này cần phải đăng nhập mới được truy cập
@@ -128,6 +129,11 @@ const routes = [
         component: ManageBrand,
         layout: AdminLayout,
         onlyAdmin: true
+    },
+    {
+        path: config.routes.search,
+        component: Search,
+        layout: DefaultLayout
     }
 ]
 
