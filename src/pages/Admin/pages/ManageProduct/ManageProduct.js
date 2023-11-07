@@ -15,7 +15,7 @@ import styles from './ManageProduct.module.scss'
 
 const cx = classNames.bind(styles)
 
-const limit = 10
+const limit = 5
 
 const ManageProduct = () => {
     const queryParams = useQueryParams()

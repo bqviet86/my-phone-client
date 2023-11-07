@@ -20,21 +20,34 @@ function AccountOrderDetail() {
     const [order, setOrder] = useState()
     const [orderStatusValue, setOrderStatusValue] = useState()
 
-    useEffect(() => {
-        const getOrder = async () => {
-            try {
-                const response = await api.get(`/orders/${order_id}`)
-                const orderResponse = response.data.result
+    const getOrder = async () => {
+        try {
+            const response = await api.get(`/orders/${order_id}`)
+            const orderResponse = response.data.result
 
-                setOrder(orderResponse)
-                setOrderStatusValue(OrderStatusValues.find((item) => item.id === orderResponse.order_status))
-            } catch (err) {
-                console.log(err.response)
-            }
+            setOrder(orderResponse)
+            setOrderStatusValue(OrderStatusValues.find((item) => item.id === orderResponse.order_status))
+        } catch (err) {
+            console.log(err.response)
         }
+    }
 
+    useEffect(() => {
         getOrder()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [order_id])
+
+    const handleCancelOrder = async () => {
+        try {
+            await api.patch(`/orders/${order_id}`, {
+                order_status: OrderStatus.Cancelled.id
+            })
+
+            getOrder()
+        } catch (err) {
+            console.log(err.response)
+        }
+    }
 
     return (
         <div className={cx('wrapper')}>
@@ -50,25 +63,31 @@ function AccountOrderDetail() {
                     <div className={cx('info')}>
                         <div className={cx('info-item')}>
                             <h2>Thông tin giao hàng</h2>
+
                             <p className={cx('text')}>
                                 <strong>Người nhận: </strong>
                                 {order.address.name}
                             </p>
+
                             <p className={cx('text')}>
                                 <strong>Email: </strong>
                                 {order.address.email}
                             </p>
+
                             <p className={cx('text')}>
                                 <strong>Số điện thoại: </strong>
                                 {order.address.phone_number}
                             </p>
+
                             <p className={cx('text')}>
                                 <strong>Địa chỉ: </strong>
                                 {order.address.specific_address}
                             </p>
                         </div>
+
                         <div className={cx('info-item')}>
                             <h2>Thông tin đơn hàng</h2>
+
                             <p className={cx('text')}>
                                 <strong>Trạng thái đơn hàng: </strong>
                                 <span
@@ -77,14 +96,17 @@ function AccountOrderDetail() {
                                     {orderStatusValue?.title}
                                 </span>
                             </p>
+
                             <p className={cx('text')}>
                                 <strong>Thời gian tạo: </strong>
                                 {formatTime(order.created_at, true)}
                             </p>
+
                             <p className={cx('text')}>
                                 <strong>Phương thức thanh toán: </strong>
                                 {PaymentMethodArray.find((item) => item.id === order.payment.payment_method)?.name}
                             </p>
+
                             <p className={cx('text')}>
                                 <strong>Thông tin ghí chú: </strong>
                                 {order.content}
@@ -94,6 +116,7 @@ function AccountOrderDetail() {
 
                     <div className={cx('products')}>
                         <h2>Sản phẩm</h2>
+
                         {order.carts.map((product) => (
                             <div key={product._id} className={cx('product-item')}>
                                 <div className={cx('image')}>
@@ -122,27 +145,40 @@ function AccountOrderDetail() {
                             <span>Tổng tạm tính</span>
                             <span>{formatPrice(order.payment.total_price)}</span>
                         </div>
+
                         <div className={cx('line')}>
                             <span>Phí vận chuyển</span>
                             <span>{formatPrice(0)}</span>
                         </div>
+
                         <div className={cx('line')}>
                             <span>Giảm giá</span>
                             <span>{formatPrice(0)}</span>
                         </div>
+
                         <div className={cx('line')}>
                             <span>Thành tiền</span>
                             <span className={cx('total-price')}>{formatPrice(order.payment.total_price)}</span>
                         </div>
+
                         <p className={cx('vat')}>(Đã bao gồm VAT)</p>
-                        <button
-                            className={cx('payment-btn', {
-                                hidden: order.order_status !== OrderStatus.PendingPayment.id
-                            })}
-                            onClick={() => navigate(`/confirm-payment/${order_id}`)}
-                        >
-                            Thanh toán ngay
-                        </button>
+
+                        {order.order_status === OrderStatus.PendingPayment.id && (
+                            <button
+                                className={cx('btn', 'payment-btn')}
+                                onClick={() => navigate(`/confirm-payment/${order_id}`)}
+                            >
+                                Thanh toán ngay
+                            </button>
+                        )}
+
+                        {[OrderStatus.PendingPayment.id, OrderStatus.PendingConfirmation.id].includes(
+                            order.order_status
+                        ) && (
+                            <button className={cx('btn', 'cancel-btn')} onClick={handleCancelOrder}>
+                                Hủy đơn hàng
+                            </button>
+                        )}
                     </div>
                 </>
             )}

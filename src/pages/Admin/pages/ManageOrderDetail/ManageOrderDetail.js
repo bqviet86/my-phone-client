@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import { Icon } from '@iconify/react'
 
-import { OrderStatus, PaymentMethodArray, Sex } from '~/constants'
+import { ChangeOrderStatusModelModes, OrderStatus, PaymentMethodArray, Sex } from '~/constants'
 import api from '~/utils/api'
 import formatPrice from '~/utils/formatPrice'
 import formatTime from '~/utils/formatTime'
@@ -22,6 +22,7 @@ function ManageOrderDetail() {
     const [orderStatusValue, setOrderStatusValue] = useState()
     const [isShowModal, setIsShowModal] = useState(false)
     const [mode, setMode] = useState('')
+    const [modalMode, setModalMode] = useState({})
 
     const getOrder = async () => {
         try {
@@ -42,6 +43,7 @@ function ManageOrderDetail() {
 
     const handleShowModal = (mode) => {
         setMode(mode)
+        setModalMode(ChangeOrderStatusModelModes.find((item) => item.mode === mode))
         setIsShowModal(true)
     }
 
@@ -182,6 +184,48 @@ function ManageOrderDetail() {
                     </div>
 
                     <div className={cx('under')}>
+                        <div className={cx('actions')}>
+                            <h2>Thao tác</h2>
+                            <div className={cx('btn-wrap')}>
+                                {order.order_status === OrderStatus.PendingConfirmation.id && (
+                                    <button
+                                        className={cx('btn', 'primary')}
+                                        onClick={() => handleShowModal('confirmOrder')}
+                                    >
+                                        Xác nhận đơn hàng
+                                    </button>
+                                )}
+
+                                {order.order_status === OrderStatus.Processing.id && (
+                                    <button
+                                        className={cx('btn', 'primary')}
+                                        onClick={() => handleShowModal('confirmProcessed')}
+                                    >
+                                        Lấy hàng thành công
+                                    </button>
+                                )}
+
+                                {order.order_status === OrderStatus.Shipping.id && (
+                                    <button
+                                        className={cx('btn', 'primary')}
+                                        onClick={() => handleShowModal('complete')}
+                                    >
+                                        Hoàn thành đơn hàng
+                                    </button>
+                                )}
+
+                                {[
+                                    OrderStatus.PendingPayment.id,
+                                    OrderStatus.PendingConfirmation.id,
+                                    OrderStatus.Processing.id
+                                ].includes(order.order_status) && (
+                                    <button className={cx('btn', 'danger')} onClick={() => handleShowModal('cancel')}>
+                                        Hủy đơn hàng
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+
                         <div className={cx('invoice')}></div>
 
                         <div className={cx('total')}>
@@ -204,61 +248,26 @@ function ManageOrderDetail() {
                             <p className={cx('vat')}>(Đã bao gồm VAT)</p>
                         </div>
 
-                        <div className={cx('actions')}>
-                            <button
-                                className={cx('btn', 'primary', {
-                                    disabled: order.order_status !== OrderStatus.PendingConfirmation.id
-                                })}
-                                onClick={() => handleShowModal('confirm')}
-                            >
-                                Xác nhận đơn hàng
-                            </button>
-                            <button
-                                className={cx('btn', 'danger', {
-                                    disabled: [
-                                        OrderStatus.Shipping.id,
-                                        OrderStatus.Completed.id,
-                                        OrderStatus.Cancelled.id
-                                    ].includes(order.order_status)
-                                })}
-                                onClick={() => handleShowModal('cancel')}
-                            >
-                                Hủy đơn hàng
-                            </button>
-                        </div>
-
                         <Modal
                             width={400}
                             height='auto'
                             bgColor='#111827'
                             textColor='#9ca3af'
                             closeBtnColor='#9ca3af'
-                            title={mode === 'confirm' ? 'Xác nhận đơn hàng' : mode === 'cancel' ? 'Hủy đơn hàng' : ''}
+                            title={modalMode.title}
                             showModal={isShowModal}
                             closeModal={() => setIsShowModal(false)}
                         >
                             <div className={cx('modal')}>
-                                <h4>
-                                    {mode === 'confirm'
-                                        ? 'Bạn có chắc chắn muốn xác nhận đơn hàng này?'
-                                        : mode === 'cancel'
-                                        ? 'Bạn có chắc chắn muốn hủy đơn hàng này?'
-                                        : ''}
-                                </h4>
+                                <h4>{modalMode.content}</h4>
                                 <div
                                     className={cx('btn', {
-                                        primary: mode === 'confirm',
+                                        primary: mode !== 'cancel',
                                         danger: mode === 'cancel'
                                     })}
-                                    onClick={
-                                        mode === 'confirm'
-                                            ? () => handleChangeOrderStatus(OrderStatus.Processing.id)
-                                            : mode === 'cancel'
-                                            ? () => handleChangeOrderStatus(OrderStatus.Cancelled.id)
-                                            : () => {}
-                                    }
+                                    onClick={() => handleChangeOrderStatus(modalMode.id)}
                                 >
-                                    {mode === 'confirm' ? 'Xác nhận' : mode === 'cancel' ? 'Hủy' : ''}
+                                    {mode === 'cancel' ? 'Hủy đơn hàng' : 'Xác nhận'}
                                 </div>
                             </div>
                         </Modal>

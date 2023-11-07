@@ -69,6 +69,7 @@ function Header() {
 
     const handleSearch = () => {
         if (searchValue.trim()) {
+            setSearchValue('')
             navigate(`${config.routes.search}?q=${searchValue}`)
         }
     }
