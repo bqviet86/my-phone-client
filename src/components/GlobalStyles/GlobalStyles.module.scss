@@ -70,6 +70,22 @@ a {
     }
 }
 
+@media print {
+    html,
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+        height: initial !important;
+        overflow: initial !important;
+        print-color-adjust: exact;
+    }
+}
+
+@page {
+    size: auto;
+    margin: 10mm;
+}
+
 // Fonts emmbeded
 @font-face {
     font-family: 'Poppins';

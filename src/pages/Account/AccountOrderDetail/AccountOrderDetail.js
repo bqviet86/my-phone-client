@@ -3,11 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import { Icon } from '@iconify/react'
 
-import { OrderStatus, PaymentMethodArray } from '~/constants'
+import { OrderStatus, PaymentMethodArray, PaymentStatus } from '~/constants'
 import api from '~/utils/api'
 import formatTime from '~/utils/formatTime'
 import formatPrice from '~/utils/formatPrice'
 import styles from './AccountOrderDetail.module.scss'
+import Modal from '~/components/Modal'
 
 const cx = classNames.bind(styles)
 
@@ -19,6 +20,7 @@ function AccountOrderDetail() {
 
     const [order, setOrder] = useState()
     const [orderStatusValue, setOrderStatusValue] = useState()
+    const [showCancelOrderModal, setShowCancelOrderModal] = useState(false)
 
     const getOrder = async () => {
         try {
@@ -98,6 +100,13 @@ function AccountOrderDetail() {
                             </p>
 
                             <p className={cx('text')}>
+                                <strong>Trạng thái thanh toán: </strong>
+                                {order.payment.payment_status === PaymentStatus.PendingPayment
+                                    ? 'Chưa thanh toán'
+                                    : 'Đã thanh toán'}
+                            </p>
+
+                            <p className={cx('text')}>
                                 <strong>Thời gian tạo: </strong>
                                 {formatTime(order.created_at, true)}
                             </p>
@@ -174,11 +183,30 @@ function AccountOrderDetail() {
 
                         {[OrderStatus.PendingPayment.id, OrderStatus.PendingConfirmation.id].includes(
                             order.order_status
-                        ) && (
-                            <button className={cx('btn', 'cancel-btn')} onClick={handleCancelOrder}>
-                                Hủy đơn hàng
-                            </button>
-                        )}
+                        ) &&
+                            order.payment.payment_status === PaymentStatus.PendingPayment && (
+                                <>
+                                    <button
+                                        className={cx('btn', 'cancel-btn')}
+                                        onClick={() => setShowCancelOrderModal(true)}
+                                    >
+                                        Hủy đơn hàng
+                                    </button>
+
+                                    <Modal
+                                        title='Xác nhận hủy đơn hàng'
+                                        showModal={showCancelOrderModal}
+                                        closeModal={() => setShowCancelOrderModal(false)}
+                                    >
+                                        <div className={cx('modal')}>
+                                            <h4>Bạn có chắc chắn muốn hủy đơn hàng này?</h4>
+                                            <div className={cx('btn', 'btn-delete')} onClick={handleCancelOrder}>
+                                                Hủy đơn hàng
+                                            </div>
+                                        </div>
+                                    </Modal>
+                                </>
+                            )}
                     </div>
                 </>
             )}
