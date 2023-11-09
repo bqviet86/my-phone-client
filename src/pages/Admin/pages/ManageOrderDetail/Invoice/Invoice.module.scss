@@ -1,7 +1,7 @@
 @media all {
     .page-break {
         display: block;
-        page-break-before: auto;
+        page-break-inside: avoid;
     }
 }
 
@@ -37,29 +37,41 @@
     }
 
     & > .title {
+        position: relative;
         margin: 20px 0;
         font-size: 3.2rem;
         font-weight: bold;
         text-align: center;
-        color: var(--blue);
+        color: #327ab7;
+
+        &::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 50%;
+            height: 2px;
+            background-color: #327ab7;
+            transform: translateX(-50%);
+        }
     }
 
     .code-wrap {
+        margin: 0 -10px;
         display: flex;
         justify-content: space-between;
+        align-items: center;
+
+        div,
+        svg {
+            margin: 0 10px;
+        }
 
         .code-info {
-            position: relative;
-            width: 50%;
-
-            &::before {
-                content: '';
-                position: absolute;
-                inset: -14px auto auto 0;
-                width: 32%;
-                height: 2px;
-                background-color: #9ca3af;
-            }
+            width: calc(55% - 20px);
+            padding: 8px;
+            border: 2px solid #327ab7;
+            border-radius: 8px;
 
             p {
                 display: flex;
@@ -85,7 +97,7 @@
             .left {
                 margin: 0 10px;
                 width: calc(55% - 20px);
-                border: 2px solid #e5e7eb;
+                border: 2px solid #327ab7;
                 border-radius: 8px;
                 overflow: hidden;
 
@@ -93,8 +105,8 @@
                     padding: 8px;
                     font-size: 1.6rem;
                     font-weight: bold;
-                    color: #333;
-                    background-color: #e5e7eb;
+                    color: #fff;
+                    background-color: #327ab7;
                 }
 
                 .desc {
@@ -117,7 +129,7 @@
             .right {
                 margin: 0 10px;
                 width: calc(45% - 20px);
-                border: 2px solid #e5e7eb;
+                border: 2px solid #327ab7;
                 border-radius: 8px;
                 overflow: hidden;
 
@@ -125,8 +137,8 @@
                     padding: 8px;
                     font-size: 1.6rem;
                     font-weight: bold;
-                    color: #333;
-                    background-color: #e5e7eb;
+                    color: #fff;
+                    background-color: #327ab7;
                 }
 
                 .desc {
@@ -148,7 +160,7 @@
         }
 
         .products {
-            margin: 20px 0;
+            margin-top: 20px;
             display: flex;
             flex-direction: column;
             border-radius: 8px;
@@ -156,8 +168,9 @@
 
             .header {
                 padding: 8px;
-                background-color: #e5e7eb;
                 border-radius: 8px 8px 0 0;
+                color: #fff;
+                background-color: #327ab7;
 
                 .title {
                     margin: 0 -8px;
@@ -179,7 +192,7 @@
                 .product-item {
                     position: relative;
                     padding: 16px 8px;
-                    border: 2px solid #e5e7eb;
+                    border: 2px solid #327ab7;
                     display: flex;
 
                     &:not(:first-child) {
@@ -248,17 +261,17 @@
                     .total-price {
                         font-size: 1.6rem;
                         font-weight: bold;
-                        color: var(--blue);
+                        color: #327ab7;
                     }
                 }
 
                 .total {
                     margin: 20px 0 0 auto;
                     padding: 8px;
-                    width: calc(40% - 16px);
+                    width: calc(45% - 10px);
                     display: flex;
                     flex-direction: column;
-                    border: 2px solid #e5e7eb;
+                    border: 2px solid #327ab7;
                     border-radius: 8px;
 
                     .line {
@@ -276,7 +289,7 @@
 
                             &.total-price {
                                 font-size: 1.8rem;
-                                color: var(--blue);
+                                color: #327ab7;
                             }
                         }
                     }
@@ -288,7 +301,7 @@
                     }
                 }
 
-                & > .footer {
+                .footer {
                     margin-top: 20px;
                     text-align: center;
 
@@ -296,7 +309,7 @@
                         margin-bottom: 4px;
                         font-size: 1.8rem;
                         font-weight: bold;
-                        color: var(--blue);
+                        color: #327ab7;
                     }
 
                     p.text {

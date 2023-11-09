@@ -111,6 +111,7 @@ function ManageBrand() {
                                             <h2 className={cx('title')}>Thêm thương hiệu</h2>
                                             <div className={cx('input-wrap')}>
                                                 <input
+                                                    spellCheck={false}
                                                     name='name'
                                                     placeholder='Tên thương hiệu'
                                                     value={data.name}

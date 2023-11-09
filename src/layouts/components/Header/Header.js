@@ -83,6 +83,7 @@ function Header() {
 
                 <div className={cx('search-wrap')}>
                     <input
+                        spellCheck={false}
                         className={cx('search-input')}
                         placeholder='Tìm kiếm điện thoại'
                         value={searchValue}

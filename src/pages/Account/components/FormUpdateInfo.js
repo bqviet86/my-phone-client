@@ -85,17 +85,30 @@ const FormUpdateInfo = () => {
                     <h2 className='font-semibold text-4xl my-2'>Thông tin tài khoản</h2>
 
                     <div className={cx('input-wrap')}>
-                        <input name='name' placeholder='Họ và tên' value={data.name} onChange={handleChange} />
+                        <input
+                            spellCheck={false}
+                            name='name'
+                            placeholder='Họ và tên'
+                            value={data.name}
+                            onChange={handleChange}
+                        />
                         {error.name && <div className={cx('error')}>{error.name}</div>}
                     </div>
 
                     <div className={cx('input-wrap')}>
-                        <input name='email' placeholder='Email' value={data.email} onChange={handleChange} />
+                        <input
+                            spellCheck={false}
+                            name='email'
+                            placeholder='Email'
+                            value={data.email}
+                            onChange={handleChange}
+                        />
                         {error.email && <div className={cx('error')}>{error.email}</div>}
                     </div>
 
                     <div className={cx('input-wrap')}>
                         <input
+                            spellCheck={false}
                             name='phone_number'
                             placeholder='Số điện thoại'
                             value={data.phone_number}
@@ -109,6 +122,7 @@ const FormUpdateInfo = () => {
                             Ngày sinh:
                         </label>
                         <input
+                            spellCheck={false}
                             type='date'
                             id='date_of_birth'
                             name='date_of_birth'
@@ -122,6 +136,7 @@ const FormUpdateInfo = () => {
                         <div className={cx('input-label')}>Giới tính:</div>
                         <div className={cx('radio-wrap')}>
                             <input
+                                spellCheck={false}
                                 type='radio'
                                 id='male'
                                 name='sex'
@@ -133,6 +148,7 @@ const FormUpdateInfo = () => {
                         </div>
                         <div className={cx('radio-wrap')}>
                             <input
+                                spellCheck={false}
                                 type='radio'
                                 id='female'
                                 name='sex'

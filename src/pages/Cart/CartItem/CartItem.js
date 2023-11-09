@@ -231,6 +231,7 @@ function CartItem({ data, checked, carts, setCarts, cartsChecked, setCartsChecke
                 <div className={cx('change-quantity')}>
                     <button onClick={() => handleUpdateQuantity(quantity - 1)}>-</button>
                     <input
+                        spellCheck={false}
                         className={cx('quantity-input')}
                         value={quantity}
                         onChange={handleChangeQuantity}

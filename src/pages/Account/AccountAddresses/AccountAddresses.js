@@ -188,17 +188,30 @@ function AccountAddresses() {
                             </h2>
 
                             <div className={cx('input-wrap')}>
-                                <input name='name' placeholder='Họ và tên' value={data.name} onChange={handleChange} />
+                                <input
+                                    spellCheck={false}
+                                    name='name'
+                                    placeholder='Họ và tên'
+                                    value={data.name}
+                                    onChange={handleChange}
+                                />
                                 {error.name && <div className={cx('error')}>{error.name}</div>}
                             </div>
 
                             <div className={cx('input-wrap')}>
-                                <input name='email' placeholder='Email' value={data.email} onChange={handleChange} />
+                                <input
+                                    spellCheck={false}
+                                    name='email'
+                                    placeholder='Email'
+                                    value={data.email}
+                                    onChange={handleChange}
+                                />
                                 {error.email && <div className={cx('error')}>{error.email}</div>}
                             </div>
 
                             <div className={cx('input-wrap')}>
                                 <input
+                                    spellCheck={false}
                                     name='phone_number'
                                     placeholder='Số điện thoại'
                                     value={data.phone_number}
@@ -209,6 +222,7 @@ function AccountAddresses() {
 
                             <div className={cx('input-wrap')}>
                                 <input
+                                    spellCheck={false}
                                     name='specific_address'
                                     placeholder='Địa chỉ cụ thể'
                                     value={data.specific_address}

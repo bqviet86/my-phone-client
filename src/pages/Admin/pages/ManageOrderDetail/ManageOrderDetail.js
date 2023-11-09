@@ -325,7 +325,8 @@ function ManageOrderDetail() {
                                     className={cx('btn', 'primary', {
                                         disabled: [
                                             OrderStatus.PendingPayment.id,
-                                            OrderStatus.PendingConfirmation.id
+                                            OrderStatus.PendingConfirmation.id,
+                                            OrderStatus.Cancelled.id
                                         ].includes(order.order_status)
                                     })}
                                     onClick={() => setIsShowInvoice(true)}
@@ -338,7 +339,8 @@ function ManageOrderDetail() {
                                     className={cx('btn', 'primary', {
                                         disabled: [
                                             OrderStatus.PendingPayment.id,
-                                            OrderStatus.PendingConfirmation.id
+                                            OrderStatus.PendingConfirmation.id,
+                                            OrderStatus.Cancelled.id
                                         ].includes(order.order_status)
                                     })}
                                     onClick={handlePrint}

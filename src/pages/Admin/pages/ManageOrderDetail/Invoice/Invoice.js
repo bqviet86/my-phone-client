@@ -116,77 +116,85 @@ function Invoice({ invoice }, ref) {
 
                             <div className={cx('body')}>
                                 {order.carts.map((product, index) => (
-                                    <div
-                                        key={product._id}
-                                        className={cx('product-item', 'page-break')}
-                                        style={index === order.carts.length - 1 ? { borderRadius: '0 0 8px 8px' } : {}}
-                                    >
-                                        <div className={cx('product')}>
-                                            <Link to={`/phone/${product.phone._id}`} className={cx('image')}>
-                                                <img
-                                                    src={`${process.env.REACT_APP_IMAGE_URL_PREFIX}/${product.phone_option.images[0]}`}
-                                                    alt={product.phone.name}
-                                                />
-                                            </Link>
-
-                                            <div className={cx('info')}>
-                                                <Link to={`/phone/${product.phone._id}`} className={cx('name')}>
-                                                    {product.phone.name}
+                                    <div className={cx('page-break')}>
+                                        <div
+                                            key={product._id}
+                                            className={cx('product-item')}
+                                            style={
+                                                index === order.carts.length - 1 ? { borderRadius: '0 0 8px 8px' } : {}
+                                            }
+                                        >
+                                            <div className={cx('product')}>
+                                                <Link to={`/phone/${product.phone._id}`} className={cx('image')}>
+                                                    <img
+                                                        src={`${process.env.REACT_APP_IMAGE_URL_PREFIX}/${product.phone_option.images[0]}`}
+                                                        alt={product.phone.name}
+                                                    />
                                                 </Link>
-                                                <p>
-                                                    <strong>Màu: </strong>
-                                                    {product.phone_option.color}
-                                                </p>
-                                                <p>
-                                                    <strong>Dung lượng: </strong>
-                                                    {product.phone_option.capacity}
-                                                </p>
+
+                                                <div className={cx('info')}>
+                                                    <Link to={`/phone/${product.phone._id}`} className={cx('name')}>
+                                                        {product.phone.name}
+                                                    </Link>
+                                                    <p>
+                                                        <strong>Màu: </strong>
+                                                        {product.phone_option.color}
+                                                    </p>
+                                                    <p>
+                                                        <strong>Dung lượng: </strong>
+                                                        {product.phone_option.capacity}
+                                                    </p>
+                                                </div>
                                             </div>
+
+                                            <div className={cx('price')}>
+                                                <span>{formatPrice(product.phone_option.price)}</span>
+                                                {/* <span>{formatPrice(product.phone_option.price_before_discount)}</span> */}
+                                            </div>
+
+                                            <div className={cx('quantity')}>{product.quantity}</div>
+
+                                            <div className={cx('total-price')}>{formatPrice(product.total_price)}</div>
                                         </div>
-
-                                        <div className={cx('price')}>
-                                            <span>{formatPrice(product.phone_option.price)}</span>
-                                            {/* <span>{formatPrice(product.phone_option.price_before_discount)}</span> */}
-                                        </div>
-
-                                        <div className={cx('quantity')}>{product.quantity}</div>
-
-                                        <div className={cx('total-price')}>{formatPrice(product.total_price)}</div>
                                     </div>
                                 ))}
 
-                                <div className={cx('total', 'page-break')}>
-                                    <div className={cx('line')}>
-                                        <span>Tổng tạm tính</span>
-                                        <span>{formatPrice(order.payment.total_price)}</span>
-                                    </div>
+                                <div className={cx('page-break')}>
+                                    <div className={cx('total')}>
+                                        <div className={cx('line')}>
+                                            <span>Tổng tạm tính</span>
+                                            <span>{formatPrice(order.payment.total_price)}</span>
+                                        </div>
 
-                                    <div className={cx('line')}>
-                                        <span>Phí vận chuyển</span>
-                                        <span>{formatPrice(0)}</span>
-                                    </div>
+                                        <div className={cx('line')}>
+                                            <span>Phí vận chuyển</span>
+                                            <span>{formatPrice(0)}</span>
+                                        </div>
 
-                                    <div className={cx('line')}>
-                                        <span>Giảm giá</span>
-                                        <span>{formatPrice(0)}</span>
-                                    </div>
+                                        <div className={cx('line')}>
+                                            <span>Giảm giá</span>
+                                            <span>{formatPrice(0)}</span>
+                                        </div>
 
-                                    <div className={cx('line')}>
-                                        <span>Thành tiền</span>
-                                        <span className={cx('total-price')}>
-                                            {formatPrice(order.payment.total_price)}
-                                        </span>
-                                    </div>
+                                        <div className={cx('line')}>
+                                            <span>Thành tiền</span>
+                                            <span className={cx('total-price')}>
+                                                {formatPrice(order.payment.total_price)}
+                                            </span>
+                                        </div>
 
-                                    <p className={cx('vat')}>(Đã bao gồm VAT)</p>
+                                        <p className={cx('vat')}>(Đã bao gồm VAT)</p>
+                                    </div>
                                 </div>
 
-                                <div className={cx('footer', 'page-break')}>
-                                    <p className={cx('title')}>Cảm ơn quý khách đã mua hàng tại SpacePhone!</p>
-                                    <p className={cx('text')}>
-                                        Nếu có bất kỳ thắc mắc nào, vui lòng liên hệ với chúng tôi tại
-                                        spacephone@gmail.com
-                                    </p>
+                                <div className={cx('page-break')}>
+                                    <div className={cx('footer')}>
+                                        <p className={cx('title')}>Cảm ơn quý khách đã mua hàng tại SpacePhone!</p>
+                                        <p className={cx('text')}>
+                                            Nếu có bất kỳ thắc mắc nào, vui lòng liên hệ với chúng tôi tại
+                                            spacephone@gmail.com
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

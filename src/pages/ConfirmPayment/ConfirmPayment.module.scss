@@ -28,6 +28,45 @@
                     font-size: 1.6rem;
                     font-weight: bold;
                 }
+
+                .btn {
+                    padding: 4px 8px;
+                    font-size: 1.4rem;
+                    border-radius: 5px;
+                    color: #fff;
+
+                    &.choose {
+                        background-color: var(--blue);
+                    }
+
+                    &.remove {
+                        background-color: #ff5a5f;
+                    }
+                }
+
+                .current-address {
+                    margin: 16px 0;
+                    padding: 0 16px;
+
+                    .heading {
+                        display: flex;
+                        align-items: center;
+
+                        .name {
+                            font-size: 1.33rem;
+                            font-weight: bold;
+                        }
+                    }
+
+                    p {
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 2;
+                        font-size: 1.33rem;
+                        overflow: hidden;
+                        word-break: break-word;
+                    }
+                }
             }
 
             .note input {

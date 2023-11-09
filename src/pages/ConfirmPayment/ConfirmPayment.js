@@ -21,10 +21,12 @@ function ConfirmPayment() {
     const [order, setOrder] = useState()
     const [addresses, setAddresses] = useState([])
     const [addressChecked, setAddressChecked] = useState('')
+    const [isShowAllAddress, setIsShowAllAddress] = useState(false)
     const [content, setContent] = useState('')
     const [paymentMethod, setPaymentMethod] = useState(PaymentMethods.CreditCard)
     const [products, setProducts] = useState([])
 
+    console.log(addressChecked)
     const { getAllAddress } = useAccount()
 
     const fetchAllAddress = async () => {
@@ -47,7 +49,6 @@ function ConfirmPayment() {
                 const orderResponse = response.data.result
 
                 setOrder(orderResponse)
-                setAddressChecked(orderResponse.address._id)
                 setContent(orderResponse.content)
                 setPaymentMethod(orderResponse.payment.payment_method)
                 setProducts(orderResponse.carts)
@@ -90,18 +91,71 @@ function ConfirmPayment() {
                 <div className={cx('content')}>
                     <div className={cx('left')}>
                         <div className={cx('address-wrap')}>
-                            <h2>Thông tin địa chỉ</h2>
-                            <AddressList
-                                addresses={addresses}
-                                fetchAllAddress={fetchAllAddress}
-                                addressChecked={addressChecked}
-                                setAddressChecked={setAddressChecked}
-                            />
+                            {isShowAllAddress || (
+                                <>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                            alignItems: 'center'
+                                        }}
+                                    >
+                                        <h2>Thông tin địa chỉ</h2>
+                                        <button
+                                            className={cx('btn', 'choose')}
+                                            onClick={() => setIsShowAllAddress(true)}
+                                        >
+                                            Chọn địa chỉ khác
+                                        </button>
+                                    </div>
+                                    <div className={cx('current-address')}>
+                                        <div className={cx('heading')}>
+                                            <p className={cx('name')}>{order.address.name}</p>
+                                        </div>
+                                        <p className={cx('phone')} style={{ margin: '6px 0' }}>
+                                            {order.address.phone_number}
+                                        </p>
+                                        <p className={cx('address-text')} style={{ marginTop: 'auto' }}>
+                                            {order.address.specific_address}
+                                        </p>
+                                    </div>
+                                </>
+                            )}
+
+                            {isShowAllAddress && (
+                                <>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                            alignItems: 'center'
+                                        }}
+                                    >
+                                        <h2>Chọn địa chỉ giao hàng</h2>
+                                        <button
+                                            className={cx('btn', 'remove')}
+                                            onClick={() => {
+                                                setIsShowAllAddress(false)
+                                                setAddressChecked('')
+                                            }}
+                                        >
+                                            Loại bỏ
+                                        </button>
+                                    </div>
+                                    <AddressList
+                                        addresses={addresses}
+                                        fetchAllAddress={fetchAllAddress}
+                                        addressChecked={addressChecked}
+                                        setAddressChecked={setAddressChecked}
+                                    />
+                                </>
+                            )}
                         </div>
 
                         <div className={cx('note')}>
                             <h2>Ghi chú cho đơn hàng</h2>
                             <input
+                                spellCheck={false}
                                 placeholder='Nhập thông tin ghi chú cho nhà bán hàng'
                                 value={content}
                                 onChange={(e) => setContent(e.target.value)}
@@ -177,10 +231,7 @@ function ConfirmPayment() {
 
                                 <p className={cx('text', 'vat')}>(Đã bao gồm thuế VAT)</p>
 
-                                <button
-                                    className={cx('payment-btn', { disabled: !addressChecked })}
-                                    onClick={handleConfirmPayment}
-                                >
+                                <button className={cx('payment-btn')} onClick={handleConfirmPayment}>
                                     Thanh toán ngay
                                 </button>
                             </div>

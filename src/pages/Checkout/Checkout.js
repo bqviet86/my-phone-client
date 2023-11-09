@@ -112,6 +112,7 @@ function Checkout() {
                         <div className={cx('note')}>
                             <h2>Ghi chú cho đơn hàng</h2>
                             <input
+                                spellCheck={false}
                                 placeholder='Nhập thông tin ghi chú cho nhà bán hàng'
                                 value={content}
                                 onChange={(e) => setContent(e.target.value)}

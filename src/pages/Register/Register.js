@@ -74,12 +74,24 @@ function Register() {
                 <h2 className={cx('title')}>Đăng ký</h2>
 
                 <div className={cx('input-wrap')}>
-                    <input name='name' placeholder='Họ và tên' value={data.name} onChange={handleChange} />
+                    <input
+                        spellCheck={false}
+                        name='name'
+                        placeholder='Họ và tên'
+                        value={data.name}
+                        onChange={handleChange}
+                    />
                     {error.name && <div className={cx('error')}>{error.name}</div>}
                 </div>
 
                 <div className={cx('input-wrap')}>
-                    <input name='email' placeholder='Email' value={data.email} onChange={handleChange} />
+                    <input
+                        spellCheck={false}
+                        name='email'
+                        placeholder='Email'
+                        value={data.email}
+                        onChange={handleChange}
+                    />
                     {error.email && <div className={cx('error')}>{error.email}</div>}
                 </div>
 
@@ -107,6 +119,7 @@ function Register() {
 
                 <div className={cx('input-wrap')}>
                     <input
+                        spellCheck={false}
                         name='phone_number'
                         placeholder='Số điện thoại'
                         value={data.phone_number}

@@ -64,7 +64,13 @@ function Login() {
                 <h2 className={cx('title')}>Đăng nhập</h2>
 
                 <div className={cx('input-wrap')}>
-                    <input name='email' placeholder='Email' value={data.email} onChange={handleChange} />
+                    <input
+                        spellCheck={false}
+                        name='email'
+                        placeholder='Email'
+                        value={data.email}
+                        onChange={handleChange}
+                    />
                     {error.email && <div className={cx('error')}>{error.email}</div>}
                 </div>
 

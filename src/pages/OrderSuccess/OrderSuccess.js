@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import { Icon } from '@iconify/react'
 
@@ -12,6 +12,8 @@ const cx = classNames.bind(styles)
 
 function OrderSuccess() {
     const queryParams = useQueryParams()
+    const navigate = useNavigate()
+
     const [isSuccess, setIsSuccess] = useState()
     const [message, setMessage] = useState('')
     const [orderId, setOrderId] = useState('')
@@ -46,6 +48,29 @@ function OrderSuccess() {
         setOrderId(queryParams.order_id)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    useEffect(() => {
+        if (isSuccess === true) {
+            const timeout = setTimeout(() => {
+                navigate(`${config.routes.accountOrders}/${orderId}`)
+            }, 3000)
+
+            return () => {
+                clearTimeout(timeout)
+            }
+        }
+
+        if (isSuccess === false) {
+            const timeout = setTimeout(() => {
+                navigate(config.routes.home)
+            }, 3000)
+
+            return () => {
+                clearTimeout(timeout)
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isSuccess])
 
     return (
         <div className={cx('wrapper')}>
