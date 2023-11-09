@@ -116,9 +116,8 @@ function Invoice({ invoice }, ref) {
 
                             <div className={cx('body')}>
                                 {order.carts.map((product, index) => (
-                                    <div className={cx('page-break')}>
+                                    <div key={product._id} className={cx('page-break')}>
                                         <div
-                                            key={product._id}
                                             className={cx('product-item')}
                                             style={
                                                 index === order.carts.length - 1 ? { borderRadius: '0 0 8px 8px' } : {}
