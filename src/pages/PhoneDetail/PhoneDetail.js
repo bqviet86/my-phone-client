@@ -193,7 +193,13 @@ function PhoneDetail() {
                     <div className={cx('under')}>
                         <div className={cx('description-wrap')}>
                             <h3 className={cx('title')}>Mô tả sản phẩm</h3>
-                            <ReactMarkdown className={cx('description')} children={phone.description} />
+                            <ReactMarkdown
+                                className={cx('description')}
+                                children={phone.description.replace(
+                                    'http://localhost:8000/static/image',
+                                    process.env.REACT_APP_IMAGE_URL_PREFIX
+                                )}
+                            />
                         </div>
 
                         <div className={cx('info-detail-wrap')}>
