@@ -195,7 +195,7 @@ function PhoneDetail() {
                             <h3 className={cx('title')}>Mô tả sản phẩm</h3>
                             <ReactMarkdown
                                 className={cx('description')}
-                                children={phone.description.replace(
+                                children={phone.description.replaceAll(
                                     'http://localhost:8000/static/image',
                                     process.env.REACT_APP_IMAGE_URL_PREFIX
                                 )}
